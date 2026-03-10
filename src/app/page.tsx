@@ -2,22 +2,25 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Github, Terminal, CheckCircle2, 
   Activity, Users, Zap, Shield, Play, Lock, LineChart, Code2, Database, Network
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function LandingPage() {
+  const { data: session, status } = useSession();
   const [repoUrl, setRepoUrl] = useState("");
   const [scanState, setScanState] = useState<"idle" | "scanning">("idle");
   const [logs, setLogs] = useState<string[]>([]);
   const router = useRouter();
 
-  const mockLogs = [
-    "Initializing Plasma Scanner engine v4.2.0...",
-    "Connecting to GitHub API...",
+  const MOCK_LOGS = [
+    "Initializing SerpentScan Scanner engine Beta 1.0...",
+    "Cloning repository locally to /tmp/workspace/job_29x...",
     "Cloning repository contents...",
     "Analyzing AST syntax trees...",
     "Running static taints analysis on external inputs...",
@@ -30,9 +33,9 @@ export default function LandingPage() {
 
     setScanState("scanning");
     
-    for (let i = 0; i < mockLogs.length; i++) {
+    for (let i = 0; i < MOCK_LOGS.length; i++) {
         await new Promise(r => setTimeout(r, 600 + Math.random() * 400));
-        setLogs(prev => [...prev, `[INFO] ${mockLogs[i]}`]);
+        setLogs(prev => [...prev, `[INFO] ${MOCK_LOGS[i]}`]);
     }
 
     router.push(`/report?repo=${encodeURIComponent(repoUrl)}`);
@@ -47,24 +50,42 @@ export default function LandingPage() {
 
       {/* HEADER */}
       <nav className="relative z-50 w-full max-w-7xl mx-auto px-6 py-6 flex flex-row items-center justify-between border-b border-white/5">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-pink-600">
                 <Shield className="w-4 h-4 text-white" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-white">Plasma</span>
-        </div>
+            <span className="text-xl font-bold tracking-tight text-white">SerpentScan</span>
+        </Link>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-            <a href="#" className="hover:text-white transition-colors">Platform</a>
-            <a href="#" className="hover:text-white transition-colors">Pricing</a>
-            <a href="#" className="hover:text-white transition-colors">Docs</a>
-            <a href="#" className="hover:text-white transition-colors">Enterprise</a>
-            <a href="#" className="hover:text-white transition-colors">Blog</a>
+            <Link href="/" className="hover:text-white transition-colors">Platform</Link>
+            <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
+            <Link href="/docs" className="hover:text-white transition-colors">Docs</Link>
+            <Link href="/enterprise" className="hover:text-white transition-colors">Enterprise</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
         </div>
         <div className="flex items-center gap-4">
-            <button className="text-sm font-medium text-zinc-300 hover:text-white transition-colors px-3 py-2">Sign in</button>
-            <button className="bg-white text-black px-5 py-2 rounded-lg text-sm font-semibold hover:bg-zinc-200 transition-colors">
-                Get Started
-            </button>
+            {status === "unauthenticated" ? (
+              <>
+                <button onClick={() => signIn("google")} className="text-sm font-medium text-zinc-300 hover:text-white transition-colors px-3 py-2">Sign in</button>
+                <button onClick={() => signIn("google")} className="bg-white text-black px-5 py-2 rounded-lg text-sm font-semibold hover:bg-zinc-200 transition-colors">
+                    Get Started
+                </button>
+              </>
+            ) : status === "authenticated" ? (
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  {session.user?.image && (
+                    <Image src={session.user.image} alt="User Avatar" width={32} height={32} className="rounded-full border border-white/20" />
+                  )}
+                  <span className="text-sm font-medium text-zinc-300 hidden md:inline-block">{session.user?.name}</span>
+                </div>
+                <button onClick={() => signOut()} className="bg-zinc-900 border border-white/10 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-zinc-800 transition-colors">
+                    Sign Out
+                </button>
+              </div>
+            ) : (
+                <div className="w-20 h-8 bg-zinc-800 rounded animate-pulse"></div>
+            )}
         </div>
       </nav>
 
@@ -73,23 +94,38 @@ export default function LandingPage() {
         {/* HERO SECTION */}
         <section className="w-full max-w-5xl mx-auto px-6 pt-32 pb-32 flex flex-col items-center text-center relative z-20">
             {/* Micro Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm mb-8">
-                <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
-                <span className="text-xs font-semibold tracking-wide text-purple-300 uppercase">Plasma v4.0 — Now Available</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 mb-8 backdrop-blur-sm">
+                <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                <span className="text-xs font-semibold tracking-wide text-purple-300 uppercase">SerpentScan Beta 1.0 — Now Available</span>
             </div>
 
-            <h1 className="text-6xl md:text-[5.5rem] font-bold tracking-tighter leading-[1.05] text-white mb-8">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[1.05] text-white mb-6 heading-font">
                 Local-first automation<br />
                 for <span className="text-gradient-purple">power users</span>
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl font-light leading-relaxed">
-                Plasma is an open source automation platform built for ultimate control and flexibility. 
-                Drop your repository link below to initiate an AI-powered local trace.
+                SerpentScan is an open source automation platform built for ultimate control and flexibility. 
+                Keep your data inside your own borders. Build, run, and scale offline.
             </p>
 
             {/* SCANNER FORM OR LOADING TERMINAL */}
-            {scanState === "idle" ? (
+            {status === "loading" ? (
+                <div className="w-full max-w-xl h-14 bg-[#0d0d12] border border-white/10 rounded-2xl animate-pulse"></div>
+            ) : status === "unauthenticated" ? (
+                <button 
+                    onClick={() => signIn("google")}
+                    className="w-full max-w-xl relative flex items-center justify-center gap-3 bg-white text-black hover:bg-zinc-200 border border-white/10 rounded-2xl p-4 shadow-[0_0_30px_rgba(147,51,234,0.15)] transition-all font-bold text-lg"
+                >
+                    <svg className="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                    </svg>
+                    Sign in with Google to Scan
+                </button>
+            ) : scanState === "idle" ? (
                 <form 
                     onSubmit={handleScan}
                     className="w-full max-w-xl relative flex items-center bg-[#0d0d12] border border-white/10 rounded-2xl p-1.5 shadow-[0_0_30px_rgba(147,51,234,0.15)] transition-all hover:border-purple-500/50"
@@ -246,11 +282,12 @@ export default function LandingPage() {
         {/* PRIVACY FRIENDLY GRAPHS SECTION */}
         <section className="w-full max-w-6xl mx-auto px-6 py-24 flex flex-col items-center">
             
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight">
-                Privacy friendly,<br/>
-                lightweight visualisation<br/>
-                and control
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-4">Leave the legacy cloud behind.</h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-transparent mb-6"></div>
+                <div className="text-lg space-y-4">
+                    <p className="text-zinc-500">Traditional iPaaS platforms suffer from unpredictable latencies, opaque routing protocols, and force you to send your data outside of your perimeter.</p>
+                    <p className="text-zinc-500">SerpentScan is locally-first, infinitely extensible, and operates flawlessly <br/> without the nagging lag of the legacy cloud.</p>
+                </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-12">
                 {/* Large Line Graph Mock */}
@@ -380,10 +417,11 @@ export default function LandingPage() {
 
         {/* BOTTOM FEATURES LIST GRID */}
         <section className="w-full max-w-6xl mx-auto px-6 pb-40">
-            <h2 className="text-3xl font-bold mb-4">Real automation<br/>for control freaks</h2>
-            <p className="text-zinc-500 mb-12 max-w-sm text-sm">
-                Plasma is loaded natively to run complex sequences on local network environments securely, without tracking any sensitive codes.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-6">Control your privacy.</h2>
+            <div className="text-lg space-y-6 max-w-xl">
+                <p className="text-zinc-500 leading-relaxed text-left">Enterprise compliance teams block most AI integration and workflow platforms because webhooks expose proprietary internal payloads to third-party endpoints.</p>
+                <p className="text-zinc-400 font-medium leading-relaxed text-left">SerpentScan is loaded natively to run complex sequences on local network environments securely, without tracking any sensitive codes.</p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 border-t border-white/5 pt-12">
                 {[
@@ -420,16 +458,15 @@ export default function LandingPage() {
                 <Activity className="w-6 h-6"/>
             </div>
 
-            <div className="flex items-center gap-3 mb-8">
+            <div className="mb-12 md:mb-0">
+            <div className="flex items-center gap-3 mb-4">
                 <div className="flex h-8 w-8 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-pink-600">
                     <Shield className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-2xl font-bold tracking-tight text-white">Plasma</span>
+                <span className="text-2xl font-bold tracking-tight text-white">SerpentScan</span>
             </div>
-
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-8">
-                Install it. script it. <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">forget it. forever.</span>
-            </h2>
+            <p className="text-zinc-500 max-w-xs leading-relaxed">The ultimate automation engine for teams who care about control, performance, and data sovereignty.</p>
+        </div>
 
             <div className="flex gap-4 mb-20">
                 <button className="bg-white hover:bg-zinc-200 text-black px-6 py-3 rounded-xl font-bold transition-all text-sm">
@@ -441,7 +478,7 @@ export default function LandingPage() {
             </div>
             
             <div className="w-full max-w-7xl mx-auto px-6 border-t border-white/5 py-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 font-semibold tracking-wide">
-                <p>© 2026 Plasma Automation Inc • Local First</p>
+                <p>© 2026 SerpentScan Automation Inc • Local First</p>
                 <div className="flex gap-6 mt-4 md:mt-0">
                     <a href="#" className="hover:text-zinc-300 transition-colors">Twitter</a>
                     <a href="#" className="hover:text-zinc-300 transition-colors">GitHub</a>
@@ -457,7 +494,6 @@ export default function LandingPage() {
             </div>
         </div>
       </footer>
-
     </div>
   );
 }

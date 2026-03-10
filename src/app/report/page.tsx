@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Shield, Lightbulb, Download } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } from "recharts";
 
@@ -31,9 +32,17 @@ type ScanResponse = {
 
 function ReportContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { status } = useSession();
   const repo = searchParams?.get("repo");
   const [data, setData] = useState<ScanResponse | null>(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
 
   useEffect(() => {
     if (!repo) return;
@@ -54,7 +63,7 @@ function ReportContent() {
       });
   }, [repo]);
 
-  if (loading || !data) {
+  if (status === "loading" || status === "unauthenticated" || loading || !data) {
     return (
       <div className="min-h-screen bg-[#0d1117] flex items-center justify-center text-zinc-400">
         <div className="flex flex-col items-center gap-4">
