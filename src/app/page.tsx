@@ -100,13 +100,13 @@ export default function LandingPage() {
             </div>
 
             <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[1.05] text-white mb-6 heading-font">
-                Local-first automation<br />
-                for <span className="text-gradient-purple">power users</span>
+                Static security analysis<br />
+                for <span className="text-gradient-purple">Python developers</span>
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl font-light leading-relaxed">
-                SerpentScan is an open source automation platform built for ultimate control and flexibility. 
-                Keep your data inside your own borders. Build, run, and scale offline.
+                SerpentScan is an open-source security scanner for Python code.<br />
+                Detect vulnerabilities, insecure patterns, and vulnerable dependencies using AST analysis, taint tracking, and CVE intelligence.
             </p>
 
             {/* SCANNER FORM OR LOADING TERMINAL */}
@@ -137,7 +137,7 @@ export default function LandingPage() {
                         type="url"
                         value={repoUrl}
                         onChange={(e) => setRepoUrl(e.target.value)}
-                        placeholder="https://github.com/we45/Vulnerable-Flask-App"
+                        placeholder="Paste your public GitHub repo here"
                         className="flex-1 bg-transparent border-none outline-none text-white px-4 py-3 placeholder:text-zinc-600 font-medium text-sm"
                         required
                     />
@@ -145,7 +145,7 @@ export default function LandingPage() {
                         type="submit"
                         className="bg-white hover:bg-zinc-200 text-black px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-all text-sm"
                     >
-                        Try locally
+                        Scan now
                     </button>
                 </form>
             ) : (
