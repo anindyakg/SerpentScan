@@ -169,89 +169,91 @@ export default function LandingPage() {
             )}
         </section>
 
-        {/* HERO UI MOCK (Node Editor) */}
-        <section className="w-full max-w-6xl mx-auto px-6 relative z-10 -mt-10 mb-32 flex justify-center">
-            <div className="w-full h-[600px] bg-[#0d0d12] border border-white/10 rounded-2xl shadow-2xl relative overflow-hidden flex">
-                {/* Editor Top Bar */}
-                <div className="absolute top-0 inset-x-0 h-12 bg-[#121217] border-b border-white/5 flex items-center px-4 gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-                    <div className="ml-auto flex items-center gap-2">
-                        <div className="h-6 w-32 bg-white/5 rounded border border-white/10"></div>
-                        <div className="h-6 w-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded flex items-center justify-center text-[10px] font-bold text-white shadow-lg">Run Flow</div>
+        {/* HOW SERPENTSCAN WORKS SECTION */}
+        <section className="w-full max-w-6xl mx-auto px-6 py-24 flex flex-col items-center relative z-10 -mt-20">
+            <div className="flex flex-col items-center mb-16 text-center">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">Everything you need to secure Python applications</h2>
+                <p className="text-lg text-zinc-400 max-w-2xl font-light">Static analysis, dependency intelligence, and AI-assisted vulnerability detection in one platform.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                {/* Feature 1 */}
+                <div className="bg-[#0b0c10] border border-white/5 rounded-2xl p-8 hover:border-purple-500/30 transition-all shadow-lg flex flex-col items-start text-left group">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                        <Code2 className="w-6 h-6" />
                     </div>
+                    <h3 className="text-xl font-bold text-white mb-2">Static Code Analysis</h3>
+                    <p className="text-sm font-semibold text-purple-400 mb-4">AST-based vulnerability detection</p>
+                    <p className="text-sm text-zinc-400 mb-6 flex-1 leading-relaxed">
+                        SerpentScan analyzes your Python code using real AST parsing and control-flow analysis to detect vulnerabilities like SQL injection, command injection, insecure deserialization, and more.
+                    </p>
+                    <ul className="space-y-2.5 text-sm text-zinc-500 font-medium w-full">
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>SQL Injection</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>Command Injection</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>Deserialization bugs</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>Path traversal</li>
+                    </ul>
                 </div>
 
-                {/* Left Sidebar Node Mocks */}
-                <div className="w-64 border-r border-white/5 pt-16 p-4 flex flex-col gap-3">
-                    <div className="w-full h-8 bg-white/5 rounded flex bg-blue-500/10 border border-blue-500/20 items-center px-3">
-                        <span className="text-xs text-blue-400 line-through decoration-blue-500/50">HTTP Request</span>
+                {/* Feature 2 */}
+                <div className="bg-[#0b0c10] border border-white/5 rounded-2xl p-8 hover:border-blue-500/30 transition-all shadow-lg flex flex-col items-start text-left group">
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                        <Network className="w-6 h-6" />
                     </div>
-                    <div className="w-full h-8 bg-white/5 rounded flex bg-green-500/10 border border-green-500/20 items-center px-3">
-                        <span className="text-xs text-green-400">Webhook Trigger</span>
-                    </div>
-                    <div className="w-full h-8 bg-white/5 rounded flex bg-purple-500/10 border border-purple-500/20 items-center px-3">
-                        <span className="text-xs text-purple-400">Database Query</span>
-                    </div>
-                    <div className="w-full h-24 mt-auto rounded border border-white/10 bg-[#1a1a24] p-3 shadow-inner relative overflow-hidden">
-                       <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Mini-map</span>
-                       <div className="absolute inset-0 bg-[url('https://transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2">Taint Tracking Engine</h3>
+                    <p className="text-sm font-semibold text-blue-400 mb-4">Trace user input to dangerous operations</p>
+                    <p className="text-sm text-zinc-400 mb-6 flex-1 leading-relaxed">
+                        SerpentScan tracks how untrusted data flows through your application and detects when it reaches sensitive operations such as database queries, shell execution, or file access.
+                    </p>
+                    <ul className="space-y-2.5 text-sm text-zinc-500 font-medium w-full mt-auto">
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>Source → Sink detection</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>Interprocedural analysis</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>Real exploit paths</li>
+                    </ul>
                 </div>
 
-                {/* Main Node Canvas Area */}
-                <div className="flex-1 relative bg-[#0a0a0c] pt-12 overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-                    {/* Node 1 */}
-                    <div className="absolute top-20 left-20 w-48 bg-[#121217] border border-white/10 rounded-xl p-3 shadow-xl">
-                        <div className="flex items-center gap-2 mb-2">
-                            <div className="w-4 h-4 rounded bg-blue-500 flex items-center justify-center">
-                                <Code2 className="w-3 h-3 text-white" />
-                            </div>
-                            <span className="text-xs font-semibold">GitHub Source</span>
-                        </div>
-                        <div className="h-6 w-full bg-black rounded border border-white/5"></div>
+                {/* Feature 3 */}
+                <div className="bg-[#0b0c10] border border-white/5 rounded-2xl p-8 hover:border-green-500/30 transition-all shadow-lg flex flex-col items-start text-left group">
+                    <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 mb-6 group-hover:scale-110 transition-transform">
+                        <Database className="w-6 h-6" />
                     </div>
-                    {/* Arrow/Line styling */}
-                    <div className="absolute top-[120px] left-[260px] w-[100px] border-t-2 border-dashed border-purple-500 shadow-[0_0_10px_#a855f7]"></div>
-                    {/* Node 2 */}
-                    <div className="absolute top-20 left-[360px] w-56 bg-[#121217] border border-purple-500/50 rounded-xl p-3 shadow-[0_0_30px_rgba(147,51,234,0.1)]">
-                         <div className="flex items-center gap-2 mb-2">
-                            <div className="w-4 h-4 rounded bg-purple-500 flex items-center justify-center">
-                                <Zap className="w-3 h-3 text-white" />
-                            </div>
-                            <span className="text-xs font-semibold">AI Trace Agent</span>
-                        </div>
-                        <div className="space-y-2">
-                           <div className="h-4 w-full bg-black rounded border border-white/5"></div>
-                           <div className="h-4 w-3/4 bg-black rounded border border-white/5"></div>
-                        </div>
-                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2">Dependency Vulnerability Scanning</h3>
+                    <p className="text-sm font-semibold text-green-400 mb-4">Detect vulnerable Python packages</p>
+                    <p className="text-sm text-zinc-400 mb-6 flex-1 leading-relaxed">
+                        Automatically scan your dependencies against the OSV vulnerability database and identify exploitable CVEs in your Python ecosystem.
+                    </p>
+                    <ul className="space-y-2.5 text-sm text-zinc-500 font-medium w-full mt-auto">
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>requirements.txt scanning</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>PyPI vulnerability lookup</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>Reachability analysis</li>
+                    </ul>
+                </div>
 
-                    {/* Fake UI Log Panel Overlay on right */}
-                    <div className="absolute top-16 bottom-4 right-4 w-72 bg-[#121217] border border-white/10 rounded-xl shadow-2xl flex flex-col overflow-hidden">
-                        <div className="h-10 border-b border-white/5 flex items-center px-4">
-                           <span className="text-xs font-bold text-zinc-300">Execution Logs (Success)</span>
-                        </div>
-                        <div className="flex-1 p-3 flex flex-col gap-2 opacity-50 font-mono text-[9px] text-zinc-400">
-                           <div>[10:42:01] Fetched repository structure.</div>
-                           <div>[10:42:02] Identified 14 security gaps.</div>
-                           <div>[10:42:05] Generated SARIF output.</div>
-                           <div className="text-yellow-500">[WARN] Unsanitized input found.</div>
-                           <div>[10:42:10] Flow executed successfully in 1.4s.</div>
-                        </div>
+                {/* Feature 4 */}
+                <div className="bg-[#0b0c10] border border-white/5 rounded-2xl p-8 hover:border-pink-500/30 transition-all shadow-lg flex flex-col items-start text-left group">
+                    <div className="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform">
+                        <Zap className="w-6 h-6" />
                     </div>
+                    <h3 className="text-xl font-bold text-white mb-2">AI-Assisted Security Insights</h3>
+                    <p className="text-sm font-semibold text-pink-400 mb-4">Understand vulnerabilities instantly</p>
+                    <p className="text-sm text-zinc-400 mb-6 flex-1 leading-relaxed">
+                        AI explains vulnerabilities, provides remediation guidance, and highlights real exploit paths so developers can fix issues faster.
+                    </p>
+                    <ul className="space-y-2.5 text-sm text-zinc-500 font-medium w-full mt-auto">
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-pink-500"></div>Vulnerability explanations</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-pink-500"></div>Secure code examples</li>
+                        <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-pink-500"></div>Risk prioritization</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        {/* ENGINEERED STRICTLY SECTION */}
+        {/* CORE CAPABILITIES SECTION */}
         <section className="w-full max-w-6xl mx-auto px-6 py-20">
-            <div className="flex justify-between items-end mb-12">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
                 <div>
-                    <h2 className="text-4xl font-bold tracking-tight mb-2">Engineered strictly for power users</h2>
-                    <p className="text-zinc-500">Plasma is locally-first, infinitely extensible, and operates flawlessly <br/> without the nagging lag of the legacy cloud.</p>
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">Built for modern Python security</h2>
+                    <p className="text-lg text-zinc-400 max-w-2xl font-light">SerpentScan combines static analysis, taint tracking, and dependency intelligence to detect real vulnerabilities before deployment.</p>
                 </div>
                 <div className="hidden md:flex items-center gap-2">
                     <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">←</button>
@@ -259,21 +261,22 @@ export default function LandingPage() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                    { title: "Local-first Execution", icon: <Lock className="w-4 h-4" /> },
-                    { title: "Zero Dependencies", icon: <CheckCircle2 className="w-4 h-4" /> },
-                    { title: "Advanced Scheduling", icon: <Activity className="w-4 h-4" /> },
-                    { title: "AI Workflow Tracing", icon: <Zap className="w-4 h-4" /> },
-                    { title: "Detailed Execution Logs", icon: <LineChart className="w-4 h-4" /> },
-                    { title: "Seamless Custom Nodes", icon: <Code2 className="w-4 h-4" /> },
+                    { title: "AST-Based Static Analysis", subtitle: "Precise code vulnerability detection", desc: "SerpentScan parses Python code using abstract syntax trees (AST) to detect vulnerabilities like SQL injection, command injection, insecure deserialization, and more.", icon: <Code2 className="w-5 h-5" /> },
+                    { title: "Taint Flow Tracking", subtitle: "Trace untrusted input through your code", desc: "Track how user-controlled data propagates through your application and identify when it reaches dangerous sinks such as database queries or shell execution.", icon: <Network className="w-5 h-5" /> },
+                    { title: "Dependency CVE Detection", subtitle: "Find vulnerable Python packages", desc: "Scan requirements files and detect known vulnerabilities in dependencies using CVE intelligence and OSV vulnerability databases.", icon: <Database className="w-5 h-5" /> },
+                    { title: "Reachability Analysis", subtitle: "Prioritize real exploitable vulnerabilities", desc: "SerpentScan determines whether vulnerable code paths are actually reachable, dramatically reducing false positives.", icon: <CheckCircle2 className="w-5 h-5" /> },
+                    { title: "Security Graph Engine", subtitle: "Understand vulnerabilities as code flows", desc: "Build a security graph of functions, data flows, and dependencies to visualize exploit paths and understand real attack surfaces.", icon: <LineChart className="w-5 h-5" /> },
+                    { title: "AI-Assisted Remediation", subtitle: "Understand and fix vulnerabilities faster", desc: "AI explains vulnerabilities, highlights exploit paths, and suggests secure code fixes so developers can remediate issues quickly.", icon: <Zap className="w-5 h-5" /> },
                 ].map((item, idx) => (
-                    <div key={idx} className={`bg-[#0b0c10] border border-white/5 rounded-xl p-5 hover:border-purple-500/30 transition-all ${idx < 2 ? 'col-span-2' : 'col-span-1 md:col-span-1'}`}>
-                        <div className="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-purple-400 mb-4">
+                    <div key={idx} className="bg-[#0b0c10] border border-white/5 rounded-xl p-6 hover:border-purple-500/30 transition-all shadow-lg flex flex-col items-start text-left group">
+                        <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-purple-400 mb-4 group-hover:scale-110 group-hover:bg-purple-500/10 group-hover:border-purple-500/20 transition-all">
                             {item.icon}
                         </div>
-                        <h3 className="text-sm font-bold text-white mb-2">{item.title}</h3>
-                        <p className="text-xs text-zinc-500">Execute strictly in your own network, removing any cloud-based friction or latency constraints.</p>
+                        <h3 className="text-sm font-bold text-white mb-1">{item.title}</h3>
+                        <p className="text-xs font-semibold text-purple-400 mb-3">{item.subtitle}</p>
+                        <p className="text-xs text-zinc-400 leading-relaxed">{item.desc}</p>
                     </div>
                 ))}
             </div>
