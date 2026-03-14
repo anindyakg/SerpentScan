@@ -6,7 +6,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Github, Terminal, CheckCircle2, 
-  Activity, Users, Zap, Shield, Play, Lock, LineChart, Code2, Database, Network
+  Activity, Users, Zap, Shield, Play, Lock, LineChart, Code2, Database, Network, Instagram
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import Link from "next/link";
 export default function LandingPage() {
   const { data: session, status } = useSession();
   const [repoUrl, setRepoUrl] = useState("");
-  const [scanState, setScanState] = useState<"idle" | "scanning">("idle");
+  const [scanState, setScanState] = useState<"idle" | "scanning" | "completed">("idle");
   const [logs, setLogs] = useState<string[]>([]);
   const router = useRouter();
 
@@ -32,13 +32,14 @@ export default function LandingPage() {
     if (!repoUrl) return;
 
     setScanState("scanning");
+    setLogs([]);
     
     for (let i = 0; i < MOCK_LOGS.length; i++) {
         await new Promise(r => setTimeout(r, 600 + Math.random() * 400));
         setLogs(prev => [...prev, `[INFO] ${MOCK_LOGS[i]}`]);
     }
 
-    router.push(`/report?repo=${encodeURIComponent(repoUrl)}`);
+    setScanState("completed");
   };
 
   return (
@@ -163,7 +164,19 @@ export default function LandingPage() {
                                 </motion.div>
                             ))}
                         </AnimatePresence>
-                        <motion.div animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-2 h-4 bg-white/70 mt-2 inline-block"/>
+                        {scanState === "scanning" && (
+                            <motion.div animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-2 h-4 bg-white/70 mt-2 inline-block"/>
+                        )}
+                        {scanState === "completed" && (
+                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-8 flex gap-4 w-full">
+                                <Link href={`/report?repo=${encodeURIComponent(repoUrl)}`} className="flex-1 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-center transition-colors text-sm">
+                                    View Results
+                                </Link>
+                                <button className="flex-1 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg font-bold text-center transition-colors text-sm">
+                                    Download Results
+                                </button>
+                            </motion.div>
+                        )}
                     </div>
                 </div>
             )}
@@ -309,27 +322,44 @@ export default function LandingPage() {
                             <path d="M0,150 Q100,100 200,120 T400,80 T600,50 T800,20" fill="none" stroke="#d946ef" strokeWidth="3" className="drop-shadow-[0_0_10px_rgba(217,70,239,0.8)]" />
                             <path d="M0,180 Q100,150 200,170 T400,120 T600,100 T800,70" fill="none" stroke="#3b82f6" strokeWidth="3" className="drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
                         </svg>
+
+                        {/* Graph Legend */}
+                        <div className="absolute top-0 right-0 flex gap-4 text-xs font-semibold">
+                           <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-fuchsia-400"></div> High Severity</div>
+                           <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-blue-500"></div> Low Severity</div>
+                        </div>
                     </div>
                 </div>
 
-                {/* KPI/Sparkline Mock */}
-                <div className="md:col-span-1 bg-[#09090b] border border-white/10 rounded-2xl p-6 relative overflow-hidden shadow-xl hover:border-white/20 transition-all">
-                    <h3 className="text-lg font-bold mb-2">Build Flows Like You Think</h3>
-                    <p className="text-sm text-zinc-500 mb-8">Deploy ultra fast node hierarchies executing in fractions of a second natively on your machine.</p>
+                {/* Security Metrics Panel */}
+                <div className="md:col-span-1 bg-[#09090b] border border-white/10 rounded-2xl p-6 relative overflow-hidden shadow-xl hover:border-white/20 transition-all flex flex-col">
+                    <h3 className="text-lg font-bold mb-2">Comprehensive Scan Reports</h3>
+                    <p className="text-sm text-zinc-500 mb-6">Instantly view security scores, line-of-code analysis, and severity breakdowns for any scanned repository.</p>
                     
-                    <div className="text-xs text-zinc-500 font-bold tracking-widest uppercase mb-1">Total nodes</div>
-                    <div className="text-5xl font-black text-white flex items-end gap-2 mb-8">
-                        3,812 <span className="text-sm text-green-400 font-semibold bg-green-500/10 px-2 py-0.5 rounded">+12.4%</span>
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-5">
+                        <div className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mb-1">Security Score</div>
+                        <div className="flex items-end justify-between">
+                            <div className="text-4xl font-black text-white">88<span className="text-lg text-zinc-500 font-light">/100</span></div>
+                            <div className="text-xs font-bold text-green-400 bg-green-500/10 px-2.5 py-1 rounded text-center border border-green-500/20">B — LOW RISK</div>
+                        </div>
                     </div>
 
-                    <div className="flex gap-4">
-                        <div className="flex-1">
-                            <div className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mb-1">Avg Execution</div>
-                            <div className="text-xl font-bold text-white">340<span className="text-rose-500 text-sm">ms</span></div>
+                    <div className="grid grid-cols-4 gap-2 mt-auto">
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col items-center justify-center">
+                            <div className="text-xl font-bold text-red-500">0</div>
+                            <div className="text-[9px] text-zinc-500 font-bold uppercase mt-1">Critical</div>
                         </div>
-                        <div className="flex-1">
-                            <div className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mb-1">Errors</div>
-                            <div className="text-xl font-bold text-white">0.012<span className="text-green-500 text-sm">%</span></div>
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col items-center justify-center">
+                            <div className="text-xl font-bold text-red-400">0</div>
+                            <div className="text-[9px] text-zinc-500 font-bold uppercase mt-1">High</div>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col items-center justify-center">
+                            <div className="text-xl font-bold text-yellow-500">2</div>
+                            <div className="text-[9px] text-zinc-500 font-bold uppercase mt-1">Med</div>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col items-center justify-center">
+                            <div className="text-xl font-bold text-blue-400">3</div>
+                            <div className="text-[9px] text-zinc-500 font-bold uppercase mt-1">Low</div>
                         </div>
                     </div>
                 </div>
@@ -337,25 +367,25 @@ export default function LandingPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full text-zinc-400 text-sm">
                 <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Performance Metrics</h4>
-                    <p className="text-xs leading-relaxed">View detailed telemetry logs and performance charts seamlessly via local databases.</p>
+                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Vulnerability Detection</h4>
+                    <p className="text-xs leading-relaxed">Detect SQL injection, command injection, insecure deserialization, and other common security flaws in Python applications.</p>
                 </div>
                 <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-pink-500"></div> Real-Time Syncing</h4>
-                    <p className="text-xs leading-relaxed">Keep your actions safely persisted and cached locally without fear of data loss.</p>
+                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-pink-500"></div> Dependency Risk Analysis</h4>
+                    <p className="text-xs leading-relaxed">Identify vulnerable dependencies using CVE intelligence from OSV and PyPI vulnerability databases.</p>
                 </div>
                 <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Fine grained access control</h4>
-                    <p className="text-xs leading-relaxed">Control precisely what your nodes can execute directly on your local system.</p>
+                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Exploit Path Visualization</h4>
+                    <p className="text-xs leading-relaxed">Understand how user input flows through your code and reaches dangerous operations.</p>
                 </div>
                 <div>
-                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div> Realtime Webhooks</h4>
-                    <p className="text-xs leading-relaxed">Create and manage flow endpoints securely while routing via custom authenticators.</p>
+                    <h4 className="font-bold text-white mb-2 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div> AI Security Analysis</h4>
+                    <p className="text-xs leading-relaxed">AI explains vulnerabilities, prioritizes risks, and provides secure code fixes.</p>
                 </div>
             </div>
 
             <button className="mt-16 bg-[#111] border border-white/10 hover:border-purple-500/50 hover:bg-[#1a1a24] transition-all px-8 py-3 rounded-full text-sm font-semibold">
-                All Features
+                View Full Security Analysis
             </button>
         </section>
 
@@ -366,46 +396,52 @@ export default function LandingPage() {
             <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto px-6 items-center justify-between gap-16 relative z-10">
                 <div className="w-full md:w-1/2">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-pink-500/30 bg-pink-500/10 mb-6">
-                        <span className="text-[10px] font-bold tracking-widest text-pink-400 uppercase">Automation AI Model Integrated</span>
+                        <span className="text-[10px] font-bold tracking-widest text-pink-400 uppercase">AI-ASSISTED SECURITY ANALYSIS</span>
                     </div>
                     <h2 className="text-4xl font-bold tracking-tight mb-6">
-                        Even more control with<br/>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">AI auto build and trigger</span>
+                        AI that understands your<br/>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">code and vulnerabilities</span>
                     </h2>
                     <p className="text-zinc-400 mb-10 text-lg font-light max-w-md">
-                        Have one AI fully generate execution workflows, execute them iteratively, and monitor for failures natively, across any node trigger you provide securely.
+                        SerpentScan uses AI to analyze vulnerability patterns, explain exploit paths, and recommend secure fixes. Combined with AST parsing and taint tracking, it helps developers understand and remediate security issues faster.
                     </p>
                     
-                    <div className="flex gap-8">
+                    <div className="grid grid-cols-2 gap-y-8 gap-x-4 mb-8">
                         <div>
-                            <div className="text-3xl font-black">650k+</div>
-                            <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest">Users</div>
+                            <div className="text-3xl font-black">1K+</div>
+                            <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest">Repositories Scanned</div>
                         </div>
                         <div>
-                            <div className="text-3xl font-black">22.2M+</div>
-                            <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest">Executions</div>
+                            <div className="text-3xl font-black">1M+</div>
+                            <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest">LoC Analyzed</div>
                         </div>
                         <div>
-                            <div className="text-3xl font-black">4.8M+</div>
-                            <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest">Workflows</div>
+                            <div className="text-3xl font-black">12K+</div>
+                            <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest">Vulnerabilities Detected</div>
+                        </div>
+                        <div>
+                            <div className="text-3xl font-black">5K+</div>
+                            <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest">Dependency Checks</div>
                         </div>
                     </div>
+                    
+                    <p className="text-sm font-semibold text-purple-400 flex items-center gap-2 border-l-2 border-purple-500 pl-3">Powered by AST parsing, taint tracking, and security graph analysis</p>
                 </div>
                 
                 <div className="w-full md:w-1/2 h-[400px] relative">
-                    {/* Node Tree Graphic Mocking exactly the reference */}
+                    {/* Security Node Tree Graphic */}
                     <div className="absolute top-10 left-0 w-48 bg-[#09090b] border border-white/10 p-3 rounded-lg shadow-2xl z-10">
-                        <div className="text-xs font-bold text-white flex items-center gap-2"><div className="w-2 h-2 rounded bg-green-500"></div> Source GitHub Code</div>
+                        <div className="text-xs font-bold text-white flex items-center gap-2"><div className="w-2 h-2 rounded bg-green-500"></div> Scan Target Repository</div>
                         <div className="text-[9px] text-zinc-500 mt-1">Configure origin repo path targeting</div>
                     </div>
 
                     <div className="absolute top-48 left-[50px] w-48 bg-[#09090b] border border-white/10 p-3 rounded-lg shadow-2xl z-10">
-                        <div className="text-xs font-bold text-white flex items-center gap-2"><div className="w-2 h-2 rounded bg-blue-500"></div> Company Information</div>
+                        <div className="text-xs font-bold text-white flex items-center gap-2"><div className="w-2 h-2 rounded bg-blue-500"></div> Vulnerability Intelligence</div>
                         <div className="text-[9px] text-zinc-500 mt-1">Extract contextual secrets environments</div>
                     </div>
                     
                     <div className="absolute top-[130px] right-0 w-48 bg-[#09090b] border border-pink-500/50 p-3 rounded-lg shadow-[0_0_20px_rgba(236,72,153,0.2)] z-10">
-                        <div className="text-xs font-bold text-white flex items-center gap-2"><div className="w-2 h-2 rounded bg-pink-500"></div> AI Trace AST Engine</div>
+                        <div className="text-xs font-bold text-white flex items-center gap-2"><div className="w-2 h-2 rounded bg-pink-500"></div> AI Security Analysis Engine</div>
                         <div className="text-[9px] text-zinc-500 mt-1">Runs autonomous traces across paths</div>
                     </div>
 
@@ -420,23 +456,23 @@ export default function LandingPage() {
 
         {/* BOTTOM FEATURES LIST GRID */}
         <section className="w-full max-w-6xl mx-auto px-6 pb-40">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-6">Control your privacy.</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-6">Security analysis you can trust</h2>
             <div className="text-lg space-y-6 max-w-xl">
-                <p className="text-zinc-500 leading-relaxed text-left">Enterprise compliance teams block most AI integration and workflow platforms because webhooks expose proprietary internal payloads to third-party endpoints.</p>
-                <p className="text-zinc-400 font-medium leading-relaxed text-left">SerpentScan is loaded natively to run complex sequences on local network environments securely, without tracking any sensitive codes.</p>
+                <p className="text-zinc-400 font-medium leading-relaxed text-left">SerpentScan analyzes public repositories and surfaces vulnerabilities with clear explanations, exploit paths, and actionable remediation guidance.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 border-t border-white/5 pt-12">
                 {[
-                    { color: "bg-purple-500", title: "Flow Studio", desc: "Build complex hierarchical structures locally and visualize the node tree without boundaries natively." },
-                    { color: "bg-blue-500", title: "Code Editor", desc: "Write any custom JavaScript or local Python functions to intercept data inline at any trace juncture immediately." },
-                    { color: "bg-green-500", title: "Schedule", desc: "Trigger local tasks conditionally on time triggers recursively using a cron-like sequence completely." },
-                    { color: "bg-pink-500", title: "Webhooks", desc: "Create endpoints natively without publishing to public proxies. Fast and latency free routing right here." }
+                    { color: "bg-purple-500", title: "Transparent Findings", subtitle: "Understand why vulnerabilities are detected", desc: "Every security finding includes detailed explanations, source code references, and vulnerability classifications such as CWE and OWASP." },
+                    { color: "bg-blue-500", title: "Exploit Path Analysis", subtitle: "Trace how vulnerabilities occur", desc: "SerpentScan shows how untrusted inputs flow through your application and reach dangerous operations." },
+                    { color: "bg-green-500", title: "Dependency Risk Visibility", subtitle: "See vulnerable dependencies instantly", desc: "Identify outdated or vulnerable packages and understand their real security impact." },
+                    { color: "bg-pink-500", title: "Actionable Fix Guidance", subtitle: "Fix vulnerabilities faster", desc: "Each issue includes secure code examples and remediation guidance so developers can resolve vulnerabilities quickly." }
                 ].map((f, i) => (
                     <div key={i} className="flex gap-4 items-start group">
-                        <div className={`mt-1 w-2.5 h-2.5 rounded-full ${f.color} shadow-[0_0_8px_${f.color}]`}></div>
+                        <div className={`mt-1.5 min-w-[10px] w-2.5 h-2.5 rounded-full ${f.color} shadow-[0_0_8px_${f.color}]`}></div>
                         <div>
-                            <h4 className="font-bold text-white mb-2">{f.title}</h4>
+                            <h4 className="font-bold text-white mb-1 text-lg">{f.title}</h4>
+                            <p className={`text-sm font-semibold mb-2 text-${f.color.split('-')[1]}-400`}>{f.subtitle}</p>
                             <p className="text-zinc-500 text-sm leading-relaxed">{f.desc}</p>
                         </div>
                     </div>
@@ -461,19 +497,23 @@ export default function LandingPage() {
                 <Activity className="w-6 h-6"/>
             </div>
 
-            <div className="mb-12 md:mb-0">
-            <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-pink-600">
-                    <Shield className="w-4 h-4 text-white" />
+            <div className="mb-12 md:mb-0 flex flex-col items-center text-center">
+                <div className="flex items-center justify-center gap-3 mb-2">
+                    <div className="flex h-8 w-8 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-pink-600">
+                        <Shield className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-2xl font-bold tracking-tight text-white">SerpentScan</span>
                 </div>
-                <span className="text-2xl font-bold tracking-tight text-white">SerpentScan</span>
+                <div className="text-zinc-400 font-semibold mb-4 text-sm">Open-source security scanning for Python code</div>
+                <p className="text-zinc-500 max-w-[400px] leading-relaxed text-sm">
+                    Detect vulnerabilities in Python code before they reach production.<br/>
+                    Static analysis, dependency scanning, and AI-assisted security insights in one platform.
+                </p>
             </div>
-            <p className="text-zinc-500 max-w-xs leading-relaxed">The ultimate automation engine for teams who care about control, performance, and data sovereignty.</p>
-        </div>
 
             <div className="flex gap-4 mb-20">
                 <button className="bg-white hover:bg-zinc-200 text-black px-6 py-3 rounded-xl font-bold transition-all text-sm">
-                    Try locally
+                    Scan Repository
                 </button>
                 <button className="bg-[#111] border border-white/10 hover:border-purple-500/50 hover:bg-[#1a1a24] text-white px-6 py-3 rounded-xl font-bold transition-all text-sm">
                     View on GitHub
@@ -482,10 +522,19 @@ export default function LandingPage() {
             
             <div className="w-full max-w-7xl mx-auto px-6 border-t border-white/5 py-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 font-semibold tracking-wide">
                 <p>© 2026 SerpentScan Automation Inc • Local First</p>
-                <div className="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" className="hover:text-zinc-300 transition-colors">Twitter</a>
-                    <a href="#" className="hover:text-zinc-300 transition-colors">GitHub</a>
-                    <a href="#" className="hover:text-zinc-300 transition-colors">Privacy</a>
+                <div className="flex items-center gap-6 mt-4 md:mt-0">
+                    <a href="#" className="hover:text-white transition-colors" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="#" className="hover:text-white transition-colors" aria-label="GitHub">
+                        <Github className="w-4 h-4" />
+                    </a>
+                    <a href="#" className="hover:text-white transition-colors" aria-label="Instagram">
+                        <Instagram className="w-4 h-4" />
+                    </a>
+                    <a href="#" className="hover:text-zinc-300 transition-colors ml-2">Privacy</a>
                     <a href="#" className="hover:text-zinc-300 transition-colors">Terms</a>
                     <a href="#" className="hover:text-zinc-300 transition-colors">Status</a>
                     <a href="#" className="hover:text-zinc-300 transition-colors">Enterprise</a>
