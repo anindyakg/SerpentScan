@@ -4,37 +4,53 @@ import Image from "next/image";
 
 const POSTS = [
     {
-        title: "Announcing SerpentScan Beta 1.0: The Deep Trace Engine",
-        category: "Product Updates",
-        date: "March 10, 2026",
-        desc: "We completely rebuilt the AST execution environment from the ground up. Over 200% faster traces on Python and JavaScript codebases.",
-        img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
-        slug: "announcing-serpentscan-beta-1-0",
+        title: "Top 10 Python security vulnerabilities developers miss",
+        category: "Security Guides",
+        date: "April 12, 2026",
+        desc: "A comprehensive guide to SQL injection, command injection, insecure deserialization, path traversal, and weak crypto in modern Python apps.",
+        img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800",
+        slug: "top-10-python-security-vulnerabilities",
         featured: true
     },
     {
-        title: "How to run local LLM AST Scanners securely",
-        category: "Engineering",
-        date: "Feb 23, 2026",
-        desc: "A deep dive into bypassing cloud-latency and piping AST syntax trees directly into LLaMa 3 running locally on your Macbook M3.",
-        img: "https://images.unsplash.com/photo-1620825937374-87fc1d6aaffa?auto=format&fit=crop&q=80&w=800",
-        slug: "run-local-llm-ast-scanners-securely"
+        title: "How SQL injection happens in Python (and how to fix it)",
+        category: "Vulnerability Deep Dive",
+        date: "April 5, 2026",
+        desc: "Stop using f-strings for queries. We explain how SQLi occurs in cursor.execute contexts and how parameterized statements prevent it entirely.",
+        img: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=800",
+        slug: "how-sql-injection-happens-in-python"
     },
     {
-        title: "Why we migrated from Go back to Rust",
-        category: "Engineering",
-        date: "Jan 14, 2026",
-        desc: "The story of why we rewrote the core SerpentScan routing Daemon to take advantage of strict memory guarantees and zero-cost abstractions.",
+        title: "Detecting Python vulnerabilities using static analysis",
+        category: "SAST Engineering",
+        date: "March 28, 2026",
+        desc: "Unpack exactly how SerpentScan traces data flow using Abstract Syntax Trees (AST) and taint analysis to identify complex security flaws before deployment.",
         img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
-        slug: "why-we-migrated-from-go-back-to-rust"
+        slug: "detecting-python-vulnerabilities-static-analysis"
     },
     {
-        title: "Securing your Webhooks with SerpentScan Connectors",
-        category: "Tutorial",
-        date: "Dec 02, 2025",
-        desc: "Learn to build a bulletproof HMAC-signed ingress gateway for your locally orchestrated SerpentScan webhook triggers.",
+        title: "Reducing false positives in security scanners",
+        category: "SAST Engineering",
+        date: "March 15, 2026",
+        desc: "Security fatigue is real. Learn how we utilize advanced call graph generation and semantic reachability bounds to eliminate noisy static analysis alerts.",
+        img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
+        slug: "reducing-false-positives-security-scanners"
+    },
+    {
+        title: "Scanning Flask for vulnerabilities using SerpentScan",
+        category: "Tutorials",
+        date: "February 22, 2026",
+        desc: "A hands-on walkthrough scanning a deeply vulnerable open-source Flask repository and interpreting the trace path outputs from SerpentScan's engine.",
+        img: "https://images.unsplash.com/photo-1620825937374-87fc1d6aaffa?auto=format&fit=crop&q=80&w=800",
+        slug: "scanning-flask-vulnerabilities-serpentscan"
+    },
+    {
+        title: "How to secure Python applications before deployment",
+        category: "Best Practices",
+        date: "February 10, 2026",
+        desc: "Integrating SerpentScan straight into GitHub Actions block risky PRs from ever reaching production. Achieve continuous delivery without compromise.",
         img: "https://images.unsplash.com/photo-1563206767-5b18f218e8e1?auto=format&fit=crop&q=80&w=800",
-        slug: "securing-webhooks-serpentscan"
+        slug: "secure-python-applications-before-deployment"
     }
 ];
 
