@@ -9,6 +9,7 @@ const POSTS = [
         date: "March 10, 2026",
         desc: "We completely rebuilt the AST execution environment from the ground up. Over 200% faster traces on Python and JavaScript codebases.",
         img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
+        slug: "announcing-serpentscan-beta-1-0",
         featured: true
     },
     {
@@ -16,21 +17,24 @@ const POSTS = [
         category: "Engineering",
         date: "Feb 23, 2026",
         desc: "A deep dive into bypassing cloud-latency and piping AST syntax trees directly into LLaMa 3 running locally on your Macbook M3.",
-        img: "https://images.unsplash.com/photo-1620825937374-87fc1d6aaffa?auto=format&fit=crop&q=80&w=800"
+        img: "https://images.unsplash.com/photo-1620825937374-87fc1d6aaffa?auto=format&fit=crop&q=80&w=800",
+        slug: "run-local-llm-ast-scanners-securely"
     },
     {
         title: "Why we migrated from Go back to Rust",
         category: "Engineering",
         date: "Jan 14, 2026",
         desc: "The story of why we rewrote the core SerpentScan routing Daemon to take advantage of strict memory guarantees and zero-cost abstractions.",
-        img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
+        img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+        slug: "why-we-migrated-from-go-back-to-rust"
     },
     {
         title: "Securing your Webhooks with SerpentScan Connectors",
         category: "Tutorial",
         date: "Dec 02, 2025",
         desc: "Learn to build a bulletproof HMAC-signed ingress gateway for your locally orchestrated SerpentScan webhook triggers.",
-        img: "https://images.unsplash.com/photo-1563206767-5b18f218e8e1?auto=format&fit=crop&q=80&w=800"
+        img: "https://images.unsplash.com/photo-1563206767-5b18f218e8e1?auto=format&fit=crop&q=80&w=800",
+        slug: "securing-webhooks-serpentscan"
     }
 ];
 
@@ -71,7 +75,7 @@ export default function BlogPage() {
         </div>
 
         {/* Featured Post */}
-        <div className="w-full bg-[#0b0c10] border border-white/10 rounded-3xl overflow-hidden hover:border-purple-500/30 transition-all cursor-pointer group mb-12 flex flex-col md:flex-row">
+        <Link href={`/blog/${POSTS[0].slug}`} className="w-full bg-[#0b0c10] border border-white/10 rounded-3xl overflow-hidden hover:border-purple-500/30 transition-all cursor-pointer group mb-12 flex flex-col md:flex-row relative z-10 block">
             <div className="w-full md:w-1/2 h-64 md:h-auto overflow-hidden relative">
                 <img src={POSTS[0].img} alt="Featured" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c10] to-transparent md:hidden"></div>
@@ -88,12 +92,12 @@ export default function BlogPage() {
                     Read Article <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
             </div>
-        </div>
+        </Link>
 
         {/* Post Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {POSTS.slice(1).map((post, i) => (
-                <div key={i} className="bg-[#0b0c10] border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-all cursor-pointer group flex flex-col">
+                <Link href={`/blog/${post.slug}`} key={i} className="bg-[#0b0c10] border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-all cursor-pointer group flex flex-col relative z-10 block">
                     <div className="h-48 w-full overflow-hidden">
                         <img src={post.img} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
@@ -108,7 +112,7 @@ export default function BlogPage() {
                             Read Article <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
                         </div>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
 
