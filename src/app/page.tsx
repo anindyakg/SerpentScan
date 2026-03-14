@@ -523,21 +523,21 @@ export default function LandingPage() {
             <div className="w-full max-w-7xl mx-auto px-6 border-t border-white/5 py-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 font-semibold tracking-wide">
                 <p>© 2026 SerpentScan Automation Inc • Local First</p>
                 <div className="flex items-center gap-6 mt-4 md:mt-0">
-                    <a href="#" className="hover:text-white transition-colors" aria-label="X (Twitter)">
+                    <a href="https://x.com/serpentscan" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="X (Twitter)">
                         <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
                     </a>
-                    <a href="#" className="hover:text-white transition-colors" aria-label="GitHub">
+                    <a href="https://github.com/serpentscan" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="GitHub">
                         <Github className="w-4 h-4" />
                     </a>
-                    <a href="#" className="hover:text-white transition-colors" aria-label="Instagram">
+                    <a href="https://instagram.com/serpentscan" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
                         <Instagram className="w-4 h-4" />
                     </a>
-                    <a href="#" className="hover:text-zinc-300 transition-colors ml-2">Privacy</a>
-                    <a href="#" className="hover:text-zinc-300 transition-colors">Terms</a>
-                    <a href="#" className="hover:text-zinc-300 transition-colors">Status</a>
-                    <a href="#" className="hover:text-zinc-300 transition-colors">Enterprise</a>
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors ml-2">Privacy</a>
+                    <a href="/terms" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors">Terms</a>
+                    <a href="/status" className="hover:text-zinc-300 transition-colors">Status</a>
+                    <a href="/enterprise" className="hover:text-zinc-300 transition-colors">Enterprise</a>
                 </div>
                 <div className="flex gap-3 text-zinc-700 mt-4 md:mt-0">
                     <div>EN</div>
