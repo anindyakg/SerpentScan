@@ -42,12 +42,12 @@ export default function EnterprisePage() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.05] text-white mb-6">
-                Security automation for<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">large organizations.</span>
+                Enterprise-ready<br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">security architecture.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl font-light leading-relaxed">
-                Deploy SerpentScan into your own VPC, manage thousands of users securely, and enforce organization-wide security policies without your data ever leaving your firewall.
+                Deploy SerpentScan inside your infrastructure and enforce organization-wide security policies with full visibility and control.
             </p>
 
             <button className="bg-white hover:bg-zinc-200 text-black px-8 py-4 rounded-xl font-bold text-base transition-colors shadow-[0_0_30px_rgba(255,255,255,0.2)]">
@@ -63,9 +63,9 @@ export default function EnterprisePage() {
                     <div className="w-12 h-12 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6">
                         <Server className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-3">VPC & On-Premise</h3>
+                    <h3 className="text-lg font-bold text-white mb-3">VPC & On-Prem Deployment</h3>
                     <p className="text-sm text-zinc-500 leading-relaxed">
-                        Host the entire SerpentScan ecosystem inside your AWS VPC, Google Cloud, Azure, or bare-metal Kubernetes cluster. Absolute data sovereignty.
+                        Deploy SerpentScan in your own AWS, Azure, or private cloud environment.
                     </p>
                 </div>
 
@@ -73,9 +73,9 @@ export default function EnterprisePage() {
                     <div className="w-12 h-12 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 mb-6">
                         <Lock className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-3">SAML SSO & SCIM</h3>
+                    <h3 className="text-lg font-bold text-white mb-3">Enterprise Identity Integration</h3>
                     <p className="text-sm text-zinc-500 leading-relaxed">
-                        Instantly provision and de-provision users across your organization using Okta, Azure AD, or any standard Identity Provider.
+                        Integrate with enterprise identity providers such as Okta, Azure AD, and Google Workspace.
                     </p>
                 </div>
 
@@ -83,9 +83,9 @@ export default function EnterprisePage() {
                     <div className="w-12 h-12 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6">
                         <Globe className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-3">Global Compliance</h3>
+                    <h3 className="text-lg font-bold text-white mb-3">Enterprise Security Controls</h3>
                     <p className="text-sm text-zinc-500 leading-relaxed">
-                        SerpentScan Enterprise is SOC2 Type II, HIPAA, and GDPR compliant ready out-of-the-box, fulfilling strict vendor risk assessment requirements.
+                        Built with encryption, access control, audit logging, and modern security best practices.
                     </p>
                 </div>
 
