@@ -1,4 +1,4 @@
-import { Shield, ChevronRight, FileCode, Terminal as TerminalIcon, ShieldAlert } from "lucide-react";
+import { Shield, ChevronRight, Terminal as TerminalIcon, ShieldAlert, Cpu, GitMerge } from "lucide-react";
 import Link from "next/link";
 
 export default function DocsPage() {
@@ -45,25 +45,46 @@ export default function DocsPage() {
                       <ul className="space-y-2 text-sm text-zinc-300 font-medium">
                           <li className="text-purple-400 bg-purple-500/10 px-3 py-1.5 rounded-md -mx-3 cursor-pointer">Introduction</li>
                           <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Installation</li>
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Quickstart Guide</li>
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">CLI Reference</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Quickstart</li>
                       </ul>
                   </div>
                   <div>
                       <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3">Core Concepts</h4>
                       <ul className="space-y-2 text-sm text-zinc-300 font-medium">
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Nodes & Executions</li>
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Triggers (Webhooks)</li>
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Data Contexts</li>
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">State Management</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Static Analysis</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Taint Tracking</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Dependency Scanning</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Vulnerability Detection</li>
                       </ul>
                   </div>
                   <div>
-                      <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3">Security Extensions</h4>
+                      <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3">Scanning</h4>
                       <ul className="space-y-2 text-sm text-zinc-300 font-medium">
-                          <li className="flex items-center justify-between hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">AST Analyzers <span className="bg-white/10 text-[10px] px-1.5 py-0.5 rounded">New</span></li>
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Custom AI Rulesets</li>
-                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">SARIF Exporters</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">CLI Usage</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Repository Scanning</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Scan Results</li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3">Security Rules</h4>
+                      <ul className="space-y-2 text-sm text-zinc-300 font-medium">
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">AST Rules</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">Custom Rulesets</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">False Positive Handling</li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3">Integrations</h4>
+                      <ul className="space-y-2 text-sm text-zinc-300 font-medium">
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">GitHub</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">CI/CD Pipelines</li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3">Output Formats</h4>
+                      <ul className="space-y-2 text-sm text-zinc-300 font-medium">
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">SARIF Export</li>
+                          <li className="hover:text-white px-3 py-1.5 -mx-3 cursor-pointer transition-colors">JSON Reports</li>
                       </ul>
                   </div>
               </div>
@@ -79,21 +100,46 @@ export default function DocsPage() {
 
                   <div>
                       <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6">Introduction to SerpentScan</h1>
-                      <p className="text-lg text-zinc-400 leading-relaxed font-light">
-                          Welcome to the official documentation for SerpentScan. SerpentScan is a local-first, extremely lightweight automation node engine designed explicitly for developers and security engineers who demand absolute control over execution logic and data privacy.
-                      </p>
+                      <div className="text-lg text-zinc-400 leading-relaxed font-light space-y-4">
+                          <p>
+                              SerpentScan is an open-source security scanner for Python codebases. It analyzes repositories using static analysis, taint tracking, and dependency vulnerability intelligence to detect security issues before they reach production.
+                          </p>
+                          <p>
+                              SerpentScan combines multiple analysis techniques:
+                          </p>
+                          <ul className="list-disc pl-6 space-y-2 text-zinc-300">
+                              <li>AST-based static analysis</li>
+                              <li>Taint flow tracking</li>
+                              <li>Dependency CVE detection</li>
+                              <li>Exploit path tracing</li>
+                              <li>AI-assisted vulnerability explanation</li>
+                          </ul>
+                          <p>
+                              It is designed for developers, security engineers, and DevSecOps teams who want to identify and fix vulnerabilities early in the development lifecycle.
+                          </p>
+                      </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
-                      <div className="bg-[#121217] border border-white/10 rounded-xl p-5 hover:border-purple-500/30 transition-colors cursor-pointer group">
+                      <div className="bg-[#121217] border border-white/10 rounded-xl p-5 hover:border-purple-500/30 transition-colors cursor-pointer group flex flex-col h-full">
                           <TerminalIcon className="w-6 h-6 text-purple-400 mb-3 group-hover:scale-110 transition-transform" />
-                          <h3 className="font-bold text-white mb-1">Quickstart via CLI</h3>
-                          <p className="text-sm text-zinc-500">Get your local node engine running in under 2 minutes.</p>
+                          <h3 className="font-bold text-white mb-2">Quickstart via CLI</h3>
+                          <p className="text-sm text-zinc-400 mb-4 flex-grow">Run a security scan on a Python repository in minutes.</p>
+                          <div className="bg-[#0b0c10] border border-white/5 rounded p-3 mt-auto">
+                              <code className="text-xs text-pink-400 font-mono break-all">serpentscan scan https://github.com/user/repo</code>
+                          </div>
                       </div>
-                      <div className="bg-[#121217] border border-white/10 rounded-xl p-5 hover:border-pink-500/30 transition-colors cursor-pointer group">
+                      <div className="bg-[#121217] border border-white/10 rounded-xl p-5 hover:border-pink-500/30 transition-colors cursor-pointer group flex flex-col h-full">
                           <ShieldAlert className="w-6 h-6 text-pink-400 mb-3 group-hover:scale-110 transition-transform" />
-                          <h3 className="font-bold text-white mb-1">Security Scanning Guide</h3>
-                          <p className="text-sm text-zinc-500">Learn how to wire the AI Trace Agent to your local repos.</p>
+                          <h3 className="font-bold text-white mb-2">Security Scanning Guide</h3>
+                          <p className="text-sm text-zinc-400">Learn how SerpentScan detects vulnerabilities including:</p>
+                          <ul className="list-disc pl-4 mt-2 text-xs text-zinc-500 space-y-1">
+                              <li>SQL injection</li>
+                              <li>Command injection</li>
+                              <li>Insecure deserialization</li>
+                              <li>Weak cryptography</li>
+                              <li>Vulnerable dependencies</li>
+                          </ul>
                       </div>
                   </div>
 
@@ -101,17 +147,23 @@ export default function DocsPage() {
 
                   <div className="space-y-6">
                       <h2 className="text-2xl font-bold text-white tracking-tight">Why SerpentScan?</h2>
-                      <p className="text-zinc-400 leading-relaxed">
-                          Traditional iPaaS (Integration Platform as a Service) providers like Zapier or Make force your sensitive data and source code to leave your perimeters, causing compliance nightmares for Enterprise security teams.
-                      </p>
-                      <p className="text-zinc-400 leading-relaxed">
-                          SerpentScan reverses this paradigm. The engine, the UI, and the execution trace runners exist entirely on your hardware as a compressed binary, orchestrating workflows exactly where the code natively lives.
-                      </p>
-                      
-                      <div className="bg-[#121217] border border-purple-500/20 shadow-[0_0_20px_rgba(147,51,234,0.05)] rounded-xl p-6 mt-6 border-l-4 border-l-purple-500">
-                          <h4 className="font-bold text-white mb-2 pb-1">Note for Cloud Users</h4>
-                          <p className="text-sm text-zinc-400 leading-relaxed">
-                              If you are using SerpentScan Cloud Sync (Pro Tier), your node configuration trees are synced to our servers, but the actual data payloads passing through the HTTP requests remain strictly processed locally inside your execution sandbox.
+                      <div className="text-zinc-400 leading-relaxed space-y-4">
+                          <p>
+                              Modern Python applications rely on complex dependencies and dynamic code execution patterns that make security vulnerabilities difficult to detect manually.
+                          </p>
+                          <p>
+                              SerpentScan helps developers identify these issues automatically by analyzing the structure and behavior of the codebase.
+                          </p>
+                          <p>Key capabilities include:</p>
+                          <ul className="list-disc pl-6 space-y-2 text-zinc-300">
+                              <li>Static analysis of Python AST</li>
+                              <li>Tracking untrusted input through code paths</li>
+                              <li>Detecting vulnerable dependencies</li>
+                              <li>Identifying real exploit paths</li>
+                              <li>Providing remediation guidance</li>
+                          </ul>
+                          <p>
+                              This enables teams to detect and fix security issues early in the development lifecycle.
                           </p>
                       </div>
                   </div>
@@ -119,37 +171,122 @@ export default function DocsPage() {
                   <hr className="border-white/5" />
 
                   <div className="space-y-6">
-                      <h2 className="text-2xl font-bold text-white tracking-tight">Installation</h2>
-                      <p className="text-zinc-400 leading-relaxed">
-                          The easiest way to install SerpentScan is using Node Package Manager (NPM). We recommend installing it globally if you plan to orchestrate cross-project workflows.
+                      <h2 className="text-2xl font-bold text-white tracking-tight">How SerpentScan Works</h2>
+                      <p className="text-zinc-400 leading-relaxed mb-6">
+                          SerpentScan analyzes Python code in several stages:
                       </p>
                       
-                      {/* Terminal Code Block Mockup */}
-                      <div className="bg-[#0b0c10] border border-white/10 rounded-xl overflow-hidden mt-4 shadow-xl">
-                          <div className="flex items-center px-4 py-2 border-b border-white/5 bg-[#121217] gap-2">
-                              <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-                              <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-                              <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-                              <span className="ml-auto text-xs text-zinc-500 font-mono">bash</span>
+                      <div className="space-y-6">
+                          <div className="flex gap-4">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">1</div>
+                              <div>
+                                  <h4 className="font-bold text-white mb-1">Repository Parsing</h4>
+                                  <p className="text-sm text-zinc-400">Source files and dependency manifests are discovered.</p>
+                              </div>
                           </div>
-                          <div className="p-5 font-mono text-sm text-white overflow-x-auto whitespace-pre">
-                              <span className="text-pink-400">npm</span> install -g serpentscan-engine <span className="text-zinc-500"># Install the CLI</span><br/><br/>
-                              <span className="text-pink-400">serpentscan</span> init                 <span className="text-zinc-500"># Scaffold the .serpentscan workspace config</span><br/>
-                              <span className="text-pink-400">serpentscan</span> start                <span className="text-zinc-500"># Boot the local GUI</span>
+                          <div className="flex gap-4">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">2</div>
+                              <div>
+                                  <h4 className="font-bold text-white mb-1">AST Analysis</h4>
+                                  <p className="text-sm text-zinc-400">Python files are parsed into abstract syntax trees.</p>
+                              </div>
+                          </div>
+                          <div className="flex gap-4">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">3</div>
+                              <div>
+                                  <h4 className="font-bold text-white mb-1">Taint Tracking</h4>
+                                  <p className="text-sm text-zinc-400">Data flows from untrusted sources are traced through the code.</p>
+                              </div>
+                          </div>
+                          <div className="flex gap-4">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">4</div>
+                              <div>
+                                  <h4 className="font-bold text-white mb-1">Dependency Scanning</h4>
+                                  <p className="text-sm text-zinc-400">Python dependencies are checked against vulnerability databases.</p>
+                              </div>
+                          </div>
+                          <div className="flex gap-4">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-sm">5</div>
+                              <div>
+                                  <h4 className="font-bold text-white mb-1">Finding Generation</h4>
+                                  <p className="text-sm text-zinc-400">Vulnerabilities are reported with exploit paths and remediation guidance.</p>
+                              </div>
                           </div>
                       </div>
                   </div>
+
+                  <hr className="border-white/5" />
+
+                  <div className="space-y-6">
+                      <h2 className="text-2xl font-bold text-white tracking-tight">Example Output</h2>
+                      <p className="text-zinc-400 leading-relaxed mb-4">
+                          SerpentScan provides clear, actionable terminal output highlighting exactly where the vulnerability exists and how to fix it:
+                      </p>
+                      
+                      <div className="bg-[#0b0c10] border border-red-500/20 rounded-xl overflow-hidden mt-4 shadow-xl">
+                          <div className="px-5 py-4 font-mono text-sm leading-relaxed overflow-x-auto whitespace-pre">
+                              <span className="text-red-400 font-bold">CRITICAL: SQL Injection</span><br/><br/>
+                              <span className="text-zinc-500">File: </span><span className="text-white">app/auth.py</span><br/>
+                              <span className="text-zinc-500">Line: </span><span className="text-white">42</span><br/><br/>
+                              <span className="text-zinc-300">User input reaches database query without parameterization.</span><br/><br/>
+                              <span className="text-green-400 font-bold">Fix:</span><br/>
+                              <span className="text-white">Use parameterized queries with placeholders.</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <hr className="border-white/5" />
+
+                  <div className="space-y-6">
+                      <h2 className="text-2xl font-bold text-white tracking-tight">Supported Vulnerabilities</h2>
+                      <p className="text-zinc-400 leading-relaxed mb-4">
+                          Out of the box, SerpentScan's AST engine and AI rulesets detect a comprehensive suite of security issues:
+                      </p>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                          {["SQL Injection", "Command Injection", "Insecure Deserialization", "Path Traversal", "Weak Cryptography", "Hardcoded Secrets", "Vulnerable Dependencies"].map((vuln, i) => (
+                              <div key={i} className="bg-zinc-900/50 border border-white/5 rounded-lg px-4 py-3 flex items-center gap-2">
+                                  <ShieldAlert className="w-4 h-4 text-purple-400 shrink-0" />
+                                  <span className="text-sm text-zinc-200">{vuln}</span>
+                              </div>
+                          ))}
+                      </div>
+                  </div>
+
+                  <hr className="border-white/5" />
+
+                  <div className="space-y-6">
+                      <h2 className="text-2xl font-bold text-white tracking-tight flex items-center gap-3">
+                          <GitMerge className="w-6 h-6 text-purple-400" />
+                          CI/CD Integration
+                      </h2>
+                      <p className="text-zinc-400 leading-relaxed mb-4">
+                          Block vulnerable code at the pull request level by integrating SerpentScan into your automated pipelines.
+                      </p>
+                      
+                      <div className="bg-[#0b0c10] border border-white/10 rounded-xl overflow-hidden shadow-xl">
+                          <div className="flex items-center px-4 py-2 border-b border-white/5 bg-[#121217]">
+                              <span className="text-xs text-zinc-300 font-mono">GitHub Actions</span>
+                          </div>
+                          <div className="p-5 font-mono text-sm text-white overflow-x-auto whitespace-pre">
+                              <span className="text-zinc-400">- name: </span><span className="text-white">Run SerpentScan</span><br/>
+                              <span className="text-zinc-400">  run: </span><span className="text-pink-400">serpentscan scan .</span>
+                          </div>
+                      </div>
+                  </div>
+
               </div>
           </main>
           
-          {/* FAKE TABLE OF CONTENTS (Right sidebar) */}
+          {/* TABLE OF CONTENTS (Right sidebar) */}
           <aside className="w-56 hidden xl:block p-8 pt-12 border-l border-white/5">
               <span className="text-xs font-bold text-white uppercase tracking-widest mb-4 block">On this page</span>
               <ul className="space-y-3 text-xs text-zinc-500 font-medium">
                   <li className="text-purple-400 cursor-pointer">Introduction</li>
                   <li className="hover:text-zinc-300 cursor-pointer">Why SerpentScan?</li>
-                  <li className="hover:text-zinc-300 cursor-pointer">Installation</li>
-                  <li className="hover:text-zinc-300 cursor-pointer">Next Steps</li>
+                  <li className="hover:text-zinc-300 cursor-pointer">How It Works</li>
+                  <li className="hover:text-zinc-300 cursor-pointer">Example Output</li>
+                  <li className="hover:text-zinc-300 cursor-pointer">Supported Vulnerabilities</li>
+                  <li className="hover:text-zinc-300 cursor-pointer">CI/CD Integration</li>
               </ul>
           </aside>
       </div>
