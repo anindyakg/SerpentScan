@@ -25,7 +25,7 @@ const POSTS = [
         category: "SAST Engineering",
         date: "March 28, 2026",
         desc: "Unpack exactly how SerpentScan traces data flow using Abstract Syntax Trees (AST) and taint analysis to identify complex security flaws before deployment.",
-        img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+        img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
         slug: "detecting-python-vulnerabilities-static-analysis"
     },
     {
@@ -41,7 +41,7 @@ const POSTS = [
         category: "Tutorials",
         date: "February 22, 2026",
         desc: "A hands-on walkthrough scanning a deeply vulnerable open-source Flask repository and interpreting the trace path outputs from SerpentScan's engine.",
-        img: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=800",
+        img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
         slug: "scanning-flask-vulnerabilities-serpentscan"
     },
     {
@@ -49,7 +49,7 @@ const POSTS = [
         category: "Best Practices",
         date: "February 10, 2026",
         desc: "Integrating SerpentScan straight into GitHub Actions block risky PRs from ever reaching production. Achieve continuous delivery without compromise.",
-        img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800",
+        img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800",
         slug: "secure-python-applications-before-deployment"
     }
 ];
