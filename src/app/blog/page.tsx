@@ -49,7 +49,7 @@ const POSTS = [
         category: "Best Practices",
         date: "February 10, 2026",
         desc: "Integrating SerpentScan straight into GitHub Actions block risky PRs from ever reaching production. Achieve continuous delivery without compromise.",
-        img: "https://images.unsplash.com/photo-1510915228340-29c0fc4fd8f6?auto=format&fit=crop&q=80&w=800",
+        img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800",
         slug: "secure-python-applications-before-deployment"
     }
 ];
