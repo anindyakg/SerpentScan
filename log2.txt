@@ -1,0 +1,15 @@
+﻿1e35bf0 docs: complete rewrite of documentation page to focus on Python SAST capabilities
+9a6f616 style(blog): replace repetitive laptop images with diverse abstract technology images
+9459e8d fix(blog): replace broken unsplash image on final security blog post
+6dece5d fix(blog): replace broken unsplash images for the final two blog cards and fix tsx parsing lint errors
+4bf32c6 feat(blog): complete pivot to 6 SEO-optimized Python SAST articles
+b876845 feat(blog): implement individual post pages for all 4 blog articles
+48e5060 fix(blog): update cards to links and fix broken webhook image
+c41570f feat: update enterprise page to focus on security features
+ffbc1e4 feat: link social icons and add custom terms/privacy pages
+cc61aea feat: update footer social links to SVG and Lucide icons
+73c11c9 feat: simplify feature grid and update dashboard copy
+a0cf495 feat: replace UI mock and old sections with new How SerpentScan Works and Core Capabilities sections
+7770a2f chore: update hero text and call-to-action on landing page
+cb94804 Checkpoint 15: Added Pricing, Docs, Enterprise, Blog pages and rebranded to SerpentScan Beta 1.0
+d4c01f4 checkpoint_plasma_redesign_complete
