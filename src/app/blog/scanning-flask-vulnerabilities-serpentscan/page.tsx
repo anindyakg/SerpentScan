@@ -39,7 +39,7 @@ export default function BlogPost() {
         </div>
 
         <div className="w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-12 border border-white/10">
-            <img src="https://images.unsplash.com/photo-1620825937374-87fc1d6aaffa?auto=format&fit=crop&q=80&w=1200" alt="Cover" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=1200" alt="Cover" className="w-full h-full object-cover" />
         </div>
 
         <div className="prose prose-invert prose-zinc max-w-none">
@@ -73,13 +73,13 @@ export default function BlogPost() {
 <code className="text-red-400 font-bold">[CRITICAL] Path Traversal (CWE-22) detected in image_server.py</code><br/>
 <br/>
 <code>Trace Path:</code><br/>
-<code>1. Source (Taint Entry) -> flask-shop-demo/app/routes.py:112</code><br/>
+<code>1. Source (Taint Entry) -{'>'} flask-shop-demo/app/routes.py:112</code><br/>
 <code>   - filename = request.args.get('file')</code><br/>
 <br/>
-<code>2. Propagation -> flask-shop-demo/app/utils/image_formatter.py:22</code><br/>
+<code>2. Propagation -{'>'} flask-shop-demo/app/utils/image_formatter.py:22</code><br/>
 <code>   - formatted_path = f"/var/www/images/&#123;filename&#125;"</code><br/>
 <br/>
-<code>3. Sink (Execution) -> flask-shop-demo/app/image_server.py:45</code><br/>
+<code>3. Sink (Execution) -{'>'} flask-shop-demo/app/image_server.py:45</code><br/>
 <code>   - return send_file(formatted_path)</code><br/>
 <br/>
 <code className="text-zinc-500">Details: Untrusted input from `request.args` flows directly into the `send_file` sink without sanitization. An attacker can use `../../` to escape the root directory and read arbitrary system files (e.g. /etc/passwd).</code><br/>

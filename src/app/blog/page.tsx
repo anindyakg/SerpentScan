@@ -41,7 +41,7 @@ const POSTS = [
         category: "Tutorials",
         date: "February 22, 2026",
         desc: "A hands-on walkthrough scanning a deeply vulnerable open-source Flask repository and interpreting the trace path outputs from SerpentScan's engine.",
-        img: "https://images.unsplash.com/photo-1620825937374-87fc1d6aaffa?auto=format&fit=crop&q=80&w=800",
+        img: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=800",
         slug: "scanning-flask-vulnerabilities-serpentscan"
     },
     {
@@ -49,7 +49,7 @@ const POSTS = [
         category: "Best Practices",
         date: "February 10, 2026",
         desc: "Integrating SerpentScan straight into GitHub Actions block risky PRs from ever reaching production. Achieve continuous delivery without compromise.",
-        img: "https://images.unsplash.com/photo-1563206767-5b18f218e8e1?auto=format&fit=crop&q=80&w=800",
+        img: "https://images.unsplash.com/photo-1510915228340-29c0fc4fd8f6?auto=format&fit=crop&q=80&w=800",
         slug: "secure-python-applications-before-deployment"
     }
 ];

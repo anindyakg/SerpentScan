@@ -39,7 +39,7 @@ export default function BlogPost() {
         </div>
 
         <div className="w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-12 border border-white/10">
-            <img src="https://images.unsplash.com/photo-1563206767-5b18f218e8e1?auto=format&fit=crop&q=80&w=1200" alt="Cover" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1510915228340-29c0fc4fd8f6?auto=format&fit=crop&q=80&w=1200" alt="Cover" className="w-full h-full object-cover" />
         </div>
 
         <div className="prose prose-invert prose-zinc max-w-none">
