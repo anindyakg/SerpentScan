@@ -59,9 +59,9 @@ export default function PricingPage() {
                 <div className="text-sm text-zinc-400 mb-6 h-10">For individual developers and open source projects.</div>
                 <div className="text-5xl font-black text-white mb-8">$0</div>
                 
-                <button className="w-full bg-[#1a1a24] text-white hover:bg-zinc-800 border border-white/10 py-3 rounded-xl font-bold mb-8 transition-colors">
-                    Download CLI
-                </button>
+                <Link href="/#scan" className="block text-center w-full bg-[#1a1a24] text-white hover:bg-zinc-800 border border-white/10 py-3 rounded-xl font-bold mb-8 transition-colors">
+                    Scan
+                </Link>
 
                 <div className="space-y-4 flex-1">
                     {[
