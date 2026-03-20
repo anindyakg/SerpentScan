@@ -5,12 +5,12 @@ import { MobileMenu } from "@/components/MobileMenu";
 
 const POSTS = [
     {
-        title: "Top 10 Python security vulnerabilities developers miss",
+        title: "Top 5 Python security vulnerabilities developers miss",
         category: "Security Guides",
         date: "April 12, 2026",
         desc: "A comprehensive guide to SQL injection, command injection, insecure deserialization, path traversal, and weak crypto in modern Python apps.",
         img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800",
-        slug: "top-10-python-security-vulnerabilities",
+        slug: "top-5-python-security-vulnerabilities",
         featured: true
     },
     {

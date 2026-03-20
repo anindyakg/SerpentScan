@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Shield, ArrowLeft } from "lucide-react";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function BlogPost() {
   return (
@@ -32,7 +33,7 @@ export default function BlogPost() {
                 <span className="text-sm font-medium text-zinc-500">April 12, 2026</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
-                Top 10 Python security vulnerabilities developers miss
+                Top 5 Python security vulnerabilities developers miss
             </h1>
             <p className="text-xl text-zinc-400 leading-relaxed font-light">
                 A comprehensive guide to SQL injection, command injection, insecure deserialization, path traversal, and weak crypto in modern Python apps.
@@ -88,7 +89,6 @@ export default function BlogPost() {
                 <pre className="text-red-400 font-mono text-sm leading-7">
 <code className="text-zinc-500"># ❌ VULNERABLE</code><br/>
 <code>import subprocess</code><br/>
-import { MobileMenu } from "@/components/MobileMenu";
 <code>user_input = request.form['domain']</code><br/>
 <code>subprocess.run(f"ping -c 4 &#123;user_input&#125;", shell=True)</code>
                 </pre>
@@ -115,7 +115,7 @@ import { MobileMenu } from "@/components/MobileMenu";
             
             <div className="mt-12 p-8 rounded-2xl bg-[#0b0c10] border border-purple-500/20 text-center">
                 <h3 className="text-xl font-bold text-white mb-3">Don't guess if your code is vulnerable.</h3>
-                <p className="text-zinc-400 mb-6">SerpentScan's static analysis engine catches all 10 of these vulnerabilities out of the box with zero configuration.</p>
+                <p className="text-zinc-400 mb-6">SerpentScan's static analysis engine catches 10 and many more out of the box with zero configuration.</p>
                 <Link href="/" className="inline-block bg-white text-black font-bold px-6 py-3 rounded-lg hover:bg-zinc-200 transition-colors">
                     Scan Your Repository Free
                 </Link>
