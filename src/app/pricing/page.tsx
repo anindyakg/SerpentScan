@@ -96,7 +96,6 @@ export default function PricingPage() {
 
                 <div className="space-y-4 flex-1">
                     <div className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
                         <span className="text-sm text-zinc-100 font-bold">Everything in Community plus</span>
                     </div>
                     {[
@@ -105,7 +104,7 @@ export default function PricingPage() {
                         "Exploit path analysis",
                         "Security report summaries",
                         "CI/CD integration",
-                        "GitHub integration",
+                        "Scan private GitHub repos",
                         "Team dashboards"
                     ].map((feature, i) => (
                         <div key={i} className="flex items-start gap-3">
@@ -128,7 +127,6 @@ export default function PricingPage() {
 
                 <div className="space-y-4 flex-1">
                     <div className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
                         <span className="text-sm text-zinc-100 font-bold">Everything in Pro plus</span>
                     </div>
                     {[
