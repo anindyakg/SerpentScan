@@ -20,9 +20,9 @@ export default function LandingPage() {
   const router = useRouter();
 
   const MOCK_LOGS = [
-    "Initializing SerpentScan Scanner engine Beta 1.0...",
-    "Cloning repository locally to /tmp/workspace/job_29x...",
-    "Cloning repository contents...",
+    "Initializing SerpentScan Scanner engine v2.0...",
+    "Scanning dependencies from requirements.txt...",
+    "Checking OSV database for known vulnerabilities...",
     "Analyzing AST syntax trees...",
     "Running static taints analysis on external inputs...",
     "Finalizing structural report...",
@@ -98,9 +98,9 @@ export default function LandingPage() {
         {/* HERO SECTION */}
         <section id="scan" className="w-full max-w-5xl mx-auto px-6 pt-32 pb-32 flex flex-col items-center text-center relative z-20">
             {/* Micro Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 mb-8 backdrop-blur-sm">
-                <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
-                <span className="text-xs font-semibold tracking-wide text-purple-300 uppercase">SerpentScan Beta 1.0 — Now Available</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-sm">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span className="text-xs font-semibold tracking-wide text-purple-300 uppercase">SerpentScan v2.0 — Now Available</span>
             </div>
 
             <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[1.05] text-white mb-6 heading-font">
