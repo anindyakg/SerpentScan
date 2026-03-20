@@ -102,24 +102,27 @@ export default function DocsPage() {
       
       {/* HEADER */}
       <nav className="relative z-50 w-full px-6 py-4 flex flex-row items-center justify-between border-b border-white/5 bg-[#0d0d12]/80 backdrop-blur-md sticky top-0">
-        <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-3">
-                <div className="flex h-6 w-6 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-pink-600">
-                    <Shield className="w-3 h-3 text-white" />
-                </div>
-                <span className="text-lg font-bold tracking-tight text-white">SerpentScan Docs</span>
-            </Link>
-            <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
-                <Link href="/" className="hover:text-white transition-colors">Platform</Link>
-                <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
-                <Link href="/docs" className="text-white font-bold">Documentation</Link>
-                <Link href="/enterprise" className="hover:text-white transition-colors">Enterprise</Link>
-                <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
-                <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+        
+        {/* LOGO */}
+        <Link href="/" className="flex items-center gap-3 relative z-10">
+            <div className="flex h-6 w-6 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-pink-600">
+                <Shield className="w-3 h-3 text-white" />
             </div>
+            <span className="text-lg font-bold tracking-tight text-white">SerpentScan Docs</span>
+        </Link>
+        
+        {/* NAV LINKS (CENTERED) */}
+        <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 text-sm font-medium text-zinc-400">
+            <Link href="/" className="hover:text-white transition-colors">Platform</Link>
+            <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
+            <Link href="/docs" className="text-white font-bold">Documentation</Link>
+            <Link href="/enterprise" className="hover:text-white transition-colors">Enterprise</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
         </div>
         
-        <div className="flex items-center gap-4">
+        {/* RIGHT ACTION BUTTONS */}
+        <div className="flex items-center gap-4 relative z-10">
             <MobileMenu />
             <div className="hidden lg:flex relative">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
