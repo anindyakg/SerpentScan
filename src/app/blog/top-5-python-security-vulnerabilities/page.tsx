@@ -115,7 +115,7 @@ export default function BlogPost() {
             
             <div className="mt-12 p-8 rounded-2xl bg-[#0b0c10] border border-purple-500/20 text-center">
                 <h3 className="text-xl font-bold text-white mb-3">Don't guess if your code is vulnerable.</h3>
-                <p className="text-zinc-400 mb-6">SerpentScan's static analysis engine catches all of the above and many more... out of the box with zero configuration.</p>
+                <p className="text-zinc-400 mb-6">SerpentScan's static analysis engine catches all of the above and many more vulnerabilities out of the box with zero configuration.</p>
                 <Link href="/" className="inline-block bg-white text-black font-bold px-6 py-3 rounded-lg hover:bg-zinc-200 transition-colors">
                     Scan Your Repository Free
                 </Link>

@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${outfit.className} bg-[#000000] text-white antialiased min-h-screen`}>
+      <body className={`${outfit.className} bg-[#000000] text-white antialiased min-h-screen flex flex-col`}>
         <AuthProvider>
           <div className="flex-1 flex flex-col">
             {children}

@@ -35,7 +35,7 @@ export default function ContactPage() {
       </nav>
 
       {/* MAIN CONTENT */}
-      <main className="relative z-10 w-full max-w-3xl mx-auto px-6 pt-32 pb-32 flex flex-col items-center text-center">
+      <main className="relative z-10 w-full max-w-3xl mx-auto px-6 flex-1 flex flex-col items-center justify-center text-center py-12">
         <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-white mb-6">
             Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Touch</span>
         </h1>
