@@ -1,5 +1,6 @@
 import { Shield, Building2, Server, Lock, Globe, Users } from "lucide-react";
 import Link from "next/link";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function EnterprisePage() {
   return (
@@ -17,14 +18,16 @@ export default function EnterprisePage() {
             </div>
             <span className="text-xl font-bold tracking-tight text-white">SerpentScan</span>
         </Link>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
             <Link href="/" className="hover:text-white transition-colors">Platform</Link>
             <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
             <Link href="/docs" className="hover:text-white transition-colors">Docs</Link>
             <Link href="/enterprise" className="text-white">Enterprise</Link>
             <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
         </div>
         <div className="flex items-center gap-4">
+            <MobileMenu />
             <Link href="/" className="bg-white text-black px-5 py-2 rounded-lg text-sm font-semibold hover:bg-zinc-200 transition-colors">
                 Back to App
             </Link>

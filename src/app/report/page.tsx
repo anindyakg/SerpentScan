@@ -65,7 +65,7 @@ function ReportContent() {
 
   if (status === "loading" || status === "unauthenticated" || loading || !data) {
     return (
-      <div className="min-h-screen bg-[#0d1117] flex items-center justify-center text-zinc-400">
+      <div className="min-h-screen bg-[#0A0A0C] flex items-center justify-center text-zinc-400">
         <div className="flex flex-col items-center gap-4">
           <div className="w-8 h-8 rounded-full border-2 border-teal-500 border-t-transparent animate-spin"></div>
           <p>Compiling comprehensive SARIF report...</p>
@@ -89,108 +89,168 @@ function ReportContent() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0d1117] text-zinc-300 font-sans pb-24">
+    <div className="min-h-screen bg-[#0A0A0C] text-zinc-300 font-sans pb-24">
       {/* Top Navigation */}
-      <header className="px-8 py-5 border-b border-white/5 bg-[#0d1117] flex items-center justify-between sticky top-0 z-50 shadow-md shadow-black/20">
+      <header className="px-8 py-5 border-b border-white/5 bg-[#0A0A0C] flex items-center justify-between sticky top-0 z-50 shadow-md shadow-black/20">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-400">
              <Shield className="w-5 h-5" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight text-teal-300">SerpentScan Security Report</h1>
+          <h1 className="text-xl font-bold tracking-tight text-[#4da6ff]">SerpentScan Security Report</h1>
         </div>
-        <button className="flex items-center gap-2 text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-md transition-colors border border-white/10">
-            <Download className="w-4 h-4" /> Export JSON
+        <button onClick={() => window.print()} className="flex items-center gap-2 text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-md transition-colors border border-white/10">
+            <Download className="w-4 h-4" /> Download PDF
         </button>
       </header>
 
       <main className="max-w-[1400px] mx-auto px-8 py-8 flex flex-col gap-6">
         
         {/* Metrics Row */}
-        <div className="flex flex-wrap gap-4 items-stretch mb-4">
-            {/* Repo Name Box */}
-            <div className="flex-1 min-w-[300px] bg-[#161b22] border border-white/5 rounded-xl p-6 flex flex-col justify-center relative shadow-sm">
-                <h2 className="text-2xl lg:text-3xl font-bold tracking-tight text-white mb-1 truncate">{data.repo_name}</h2>
-                <div className="text-xs text-zinc-500 font-medium uppercase tracking-wider">Repository</div>
-                <div className="absolute bottom-6 right-6 text-[10px] text-zinc-600 border border-white/5 px-3 py-1 bg-black/20 rounded-full">
-                    Generated {new Date().toISOString().split('T')[0]} UTC • SerpentScan v2.0
-                </div>
+        <div className="flex flex-nowrap overflow-x-auto hide-scrollbar gap-4 items-stretch mb-2 pb-2">
+            {/* Repo Box */}
+            <div className="w-48 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col justify-center items-center shadow-sm text-center">
+                <h2 className="text-xl font-bold tracking-tight text-white mb-2 truncate w-full">{data.repo_name}</h2>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Repository</div>
             </div>
 
-            {/* Stats Boxes */}
-            <div className="bg-[#161b22] border border-white/5 rounded-xl p-6 flex flex-col items-center justify-center min-w-[100px] shadow-sm">
-                <div className="text-3xl font-bold text-white mb-2">{data.files_scanned}</div>
+            {/* Repo Type Box */}
+            <div className="w-28 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="bg-white/5 text-zinc-400 text-[10px] font-bold px-3 py-1 rounded inline-block mb-2 uppercase tracking-wide">
+                    LIBRARY
+                </div>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Repo Type</div>
+            </div>
+
+            {/* Files */}
+            <div className="w-28 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-white mb-2">{data.files_scanned}</div>
                 <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Files</div>
             </div>
             
-            <div className="bg-[#161b22] border border-white/5 rounded-xl p-6 flex flex-col items-center justify-center min-w-[100px] shadow-sm">
-                <div className="text-3xl font-bold text-white mb-2">{data.lines_scanned}</div>
+            {/* LOC */}
+            <div className="w-32 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-white mb-2">{data.lines_scanned.toLocaleString()}</div>
                 <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">LOC</div>
             </div>
 
-            <div className="bg-[#161b22] border border-white/5 rounded-xl p-6 flex flex-col items-center justify-center min-w-[100px] shadow-sm">
-                <div className="text-3xl font-bold text-white mb-2">{data.scan_duration_s.toFixed(1)}s</div>
+            {/* Scan Time */}
+            <div className="w-32 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-white mb-2">{data.scan_duration_s.toFixed(1)}s</div>
                 <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Scan Time</div>
             </div>
 
-            {/* Risk Box */}
-            <div className="bg-[#161b22] border border-white/5 rounded-xl p-6 flex flex-col items-center justify-center min-w-[200px] shadow-sm">
-                <div className="bg-red-500/90 text-white font-bold text-xl px-4 py-1.5 rounded flex items-center gap-2 mb-2">
-                    {riskScore}/100 CRITICAL
-                </div>
-                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Risk</div>
+            {/* Security Score */}
+            <div className="w-32 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-white mb-2">{(100 - riskScore)}/100</div>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Security Score</div>
             </div>
 
-            {/* Severity Counters Area WITH GRAPH */}
-            <div className="flex gap-4 bg-[#161b22] border border-white/5 rounded-xl p-6 flex-1 shadow-sm">
-                <div className="flex gap-4 flex-1 items-center justify-center">
-                    <div className="w-[100px] flex flex-col items-center justify-center">
-                        <div className="text-red-500 text-2xl font-bold">{criticals.length}</div>
-                        <div className="text-[10px] text-zinc-500 mt-1 uppercase font-bold tracking-wider">Critical</div>
-                    </div>
-                    <div className="w-[100px] flex flex-col items-center justify-center border-l border-white/5 pl-4">
-                        <div className="text-orange-500 text-2xl font-bold">{highs.length}</div>
-                        <div className="text-[10px] text-zinc-500 mt-1 uppercase font-bold tracking-wider">High</div>
-                    </div>
-                    <div className="w-[100px] flex flex-col items-center justify-center border-l border-white/5 pl-4">
-                        <div className="text-yellow-500 text-2xl font-bold">{mediums}</div>
-                        <div className="text-[10px] text-zinc-500 mt-1 uppercase font-bold tracking-wider">Medium</div>
-                    </div>
+            {/* Grade */}
+            <div className="w-36 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className={`text-[12px] font-bold text-white px-3 py-1 rounded flex items-center mb-2 ${riskScore > 0 ? "bg-red-500/90" : "bg-green-500/90"}`}>
+                    {riskScore > 0 ? "F — CRITICAL RISK" : "A — LOW RISK"}
                 </div>
-                
-                {/* Recharts Donut */}
-                <div className="w-[150px] h-[100px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie
-                                data={chartData}
-                                cx="50%"
-                                cy="50%"
-                                innerRadius={30}
-                                outerRadius={45}
-                                paddingAngle={5}
-                                dataKey="value"
-                            >
-                                {chartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
-                                ))}
-                            </Pie>
-                            <RechartsTooltip contentStyle={{ backgroundColor: '#161b22', borderColor: '#30363d', fontSize: '12px' }} itemStyle={{ color: '#fff' }} />
-                        </PieChart>
-                    </ResponsiveContainer>
-                </div>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Grade</div>
+            </div>
+
+            {/* Critical */}
+            <div className="w-24 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-red-500 mb-2">{criticals.length}</div>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Critical</div>
+            </div>
+
+            {/* High */}
+            <div className="w-24 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-red-500 mb-2">{highs.length}</div>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">High</div>
+            </div>
+
+            {/* Medium */}
+            <div className="w-24 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-amber-500 mb-2">{mediums}</div>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Med</div>
+            </div>
+
+            {/* Low */}
+            <div className="w-24 shrink-0 bg-[#111] border border-white/5 rounded-xl p-5 flex flex-col items-center justify-center shadow-sm">
+                <div className="text-2xl font-bold text-blue-500 mb-2">{lows}</div>
+                <div className="text-[10px] text-zinc-500 font-medium uppercase tracking-wider">Low</div>
             </div>
         </div>
+        
+        <div className="text-[11px] text-zinc-500 font-medium -mt-2 mb-6 ml-2">
+            Generated {new Date().toISOString().split('T')[0]} 06:33 UTC • SerpentScan v2.0
+        </div>
+
+        {/* Score Interpretation Table */}
+        <div className="mt-8 mb-6 ml-2">
+            <h3 className="text-lg font-bold text-white mb-4">Score Interpretation</h3>
+            <div className="bg-[#111] border border-white/5 rounded-xl overflow-hidden shadow-sm">
+                <table className="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr className="border-b border-white/5 bg-[#0b0c10]">
+                            <th className="font-semibold text-zinc-400 p-4">Score</th>
+                            <th className="font-semibold text-zinc-400 p-4">Grade</th>
+                            <th className="font-semibold text-zinc-400 p-4">Label</th>
+                            <th className="font-semibold text-zinc-400 p-4">Meaning</th>
+                            <th className="font-semibold text-zinc-400 p-4">Recommended Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5 text-zinc-300">
+                        <tr className="hover:bg-white/[0.02]">
+                            <td className="p-4 py-3">90–100</td>
+                            <td className="p-4 py-3"><span className="bg-green-500 text-white font-bold px-3 py-1 rounded text-xs">A</span></td>
+                            <td className="p-4 py-3 text-[10px] tracking-wider uppercase font-bold text-white">SECURE</td>
+                            <td className="p-4 py-3">Minimal or no findings. Strong security posture.</td>
+                            <td className="p-4 py-3">Maintain current practices. Schedule periodic re-scan.</td>
+                        </tr>
+                        <tr className="hover:bg-white/[0.02]">
+                            <td className="p-4 py-3">75–89</td>
+                            <td className="p-4 py-3"><span className="bg-green-500 text-white font-bold px-3 py-1 rounded text-xs">B</span></td>
+                            <td className="p-4 py-3 text-[10px] tracking-wider uppercase font-bold text-white">LOW RISK</td>
+                            <td className="p-4 py-3">Minor issues present with low exploitability.</td>
+                            <td className="p-4 py-3">Remediate before next major release.</td>
+                        </tr>
+                        <tr className="hover:bg-white/[0.02]">
+                            <td className="p-4 py-3">50–74</td>
+                            <td className="p-4 py-3"><span className="bg-amber-500 text-white font-bold px-3 py-1 rounded text-xs">C</span></td>
+                            <td className="p-4 py-3 text-[10px] tracking-wider uppercase font-bold text-white">MEDIUM RISK</td>
+                            <td className="p-4 py-3">Multiple issues; some may be exploitable.</td>
+                            <td className="p-4 py-3">Prioritise HIGH findings. Fix before production deploy.</td>
+                        </tr>
+                        <tr className="hover:bg-white/[0.02]">
+                            <td className="p-4 py-3">25–49</td>
+                            <td className="p-4 py-3"><span className="bg-orange-500 text-white font-bold px-3 py-1 rounded text-xs">D</span></td>
+                            <td className="p-4 py-3 text-[10px] tracking-wider uppercase font-bold text-white">HIGH RISK</td>
+                            <td className="p-4 py-3">Serious vulnerabilities present.</td>
+                            <td className="p-4 py-3">Halt new features. Remediate CRITICAL and HIGH urgently.</td>
+                        </tr>
+                        <tr className="hover:bg-white/[0.02]">
+                            <td className="p-4 py-3">0–24</td>
+                            <td className="p-4 py-3"><span className="bg-red-500 text-white font-bold px-3 py-1 rounded text-xs">F</span></td>
+                            <td className="p-4 py-3 text-[10px] tracking-wider uppercase font-bold text-white">CRITICAL RISK</td>
+                            <td className="p-4 py-3">Critical or easily exploitable issues confirmed.</td>
+                            <td className="p-4 py-3">Do not deploy. Immediate security review required.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div className="text-[10px] text-zinc-500 font-medium mt-3 mb-10">
+                Score = 100 - penalties. Code findings (weighted by severity) + capped vulnerable dependency penalty. First occurrence of each severity is penalised most heavily.
+            </div>
+        </div>
+
 
         {/* AI Analysis Warning Box */}
         <div>
             <h3 className="text-sm font-bold text-white mb-3">AI Analysis</h3>
-            <div className="bg-[#0d1117] border border-white/5 rounded-lg p-5 text-sm text-zinc-400 font-mono shadow-inner leading-relaxed">
+            <div className="bg-[#0A0A0C] border border-white/5 rounded-lg p-5 text-sm text-zinc-400 font-mono shadow-inner leading-relaxed">
                 AI enrichment unavailable: Error code: 401 - {`{'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYqEZVqGF8QnrsogisQ9S'}`}
             </div>
         </div>
 
         {/* Recommendations */}
-        <div className="mt-4 bg-[#161b22] border border-white/5 rounded-xl p-8 shadow-sm">
+        <div className="mt-4 bg-[#111] border border-white/5 rounded-xl p-8 shadow-sm">
             <h3 className="text-sm font-bold text-white mb-4">Recommendations</h3>
             <div className="text-sm text-zinc-300 space-y-4">
                 <p className="flex gap-3"><span className="text-zinc-600 font-mono">1.</span> Review all CRITICAL and HIGH severity findings immediately.</p>
@@ -206,7 +266,7 @@ function ReportContent() {
             <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-widest pl-2">CRITICAL ({criticals.length})</h3>
             <div className="space-y-6">
                 {criticals.map((finding) => (
-                    <div key={finding.id} className="bg-[#161b22] rounded-xl shadow-sm border border-[#30363d] overflow-hidden relative">
+                    <div key={finding.id} className="bg-[#111] rounded-xl shadow-sm border border-white/10 overflow-hidden relative">
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-500"></div>
                         <div className="p-7">
                             <div className="flex flex-col gap-2 mb-4">
@@ -224,11 +284,11 @@ function ReportContent() {
                                 </p>
                             </div>
 
-                            <div className="bg-[#0d1117] rounded-lg border border-[#30363d] p-5 font-mono text-sm overflow-x-auto text-zinc-300 whitespace-pre leading-relaxed">
+                            <div className="bg-[#0A0A0C] rounded-lg border border-white/10 p-5 font-mono text-sm overflow-x-auto text-zinc-300 whitespace-pre leading-relaxed">
                                 {finding.code_snippet}
                             </div>
                         </div>
-                        <div className="bg-[#0d1117] px-7 py-4 border-t border-[#30363d] flex flex-wrap text-xs text-zinc-500 gap-x-6 gap-y-2">
+                        <div className="bg-[#0A0A0C] px-7 py-4 border-t border-white/10 flex flex-wrap text-xs text-zinc-500 gap-x-6 gap-y-2">
                             <span><strong className="text-zinc-400">CWE:</strong> {finding.cwe}</span>
                             <span><strong className="text-zinc-400">OWASP:</strong> {finding.owasp}</span>
                             <span><strong className="text-zinc-400">Source:</strong> {finding.source}</span>
@@ -243,7 +303,7 @@ function ReportContent() {
             <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-widest pl-2">HIGH ({highs.length})</h3>
             <div className="space-y-6">
                 {highs.map((finding) => (
-                    <div key={finding.id} className="bg-[#161b22] rounded-xl shadow-sm border border-[#30363d] overflow-hidden relative">
+                    <div key={finding.id} className="bg-[#111] rounded-xl shadow-sm border border-white/10 overflow-hidden relative">
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
                         <div className="p-7">
                             <div className="flex flex-col gap-2 mb-4">
@@ -261,11 +321,11 @@ function ReportContent() {
                                 </p>
                             </div>
 
-                            <div className="bg-[#0d1117] rounded-lg border border-[#30363d] p-5 font-mono text-sm overflow-x-auto text-zinc-300 whitespace-pre leading-relaxed">
+                            <div className="bg-[#0A0A0C] rounded-lg border border-white/10 p-5 font-mono text-sm overflow-x-auto text-zinc-300 whitespace-pre leading-relaxed">
                                 {finding.code_snippet}
                             </div>
                         </div>
-                        <div className="bg-[#0d1117] px-7 py-4 border-t border-[#30363d] flex flex-wrap text-xs text-zinc-500 gap-x-6 gap-y-2">
+                        <div className="bg-[#0A0A0C] px-7 py-4 border-t border-white/10 flex flex-wrap text-xs text-zinc-500 gap-x-6 gap-y-2">
                             <span><strong className="text-zinc-400">CWE:</strong> {finding.cwe}</span>
                             <span><strong className="text-zinc-400">OWASP:</strong> {finding.owasp}</span>
                             <span><strong className="text-zinc-400">Source:</strong> {finding.source}</span>
@@ -283,7 +343,7 @@ function ReportContent() {
 
 export default function ReportPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#0d1117] flex items-center justify-center text-white">Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#0A0A0C] flex items-center justify-center text-white">Loading...</div>}>
       <ReportContent />
     </Suspense>
   );

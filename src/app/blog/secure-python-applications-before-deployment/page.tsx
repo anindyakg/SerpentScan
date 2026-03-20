@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Shield, ArrowLeft } from "lucide-react";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function BlogPost() {
   return (
@@ -17,6 +18,7 @@ export default function BlogPost() {
             <span className="text-xl font-bold tracking-tight text-white">SerpentScan</span>
         </Link>
         <div className="flex items-center gap-4">
+            <MobileMenu />
             <Link href="/blog" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-semibold">
                 <ArrowLeft className="w-4 h-4" /> Back to Blog
             </Link>

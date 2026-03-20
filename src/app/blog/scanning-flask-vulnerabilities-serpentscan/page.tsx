@@ -17,6 +17,7 @@ export default function BlogPost() {
             <span className="text-xl font-bold tracking-tight text-white">SerpentScan</span>
         </Link>
         <div className="flex items-center gap-4">
+            <MobileMenu />
             <Link href="/blog" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-semibold">
                 <ArrowLeft className="w-4 h-4" /> Back to Blog
             </Link>
@@ -95,6 +96,7 @@ export default function BlogPost() {
                 <pre className="text-green-400 font-mono text-sm leading-7">
 <code className="text-zinc-300">from werkzeug.utils import secure_filename</code><br/>
 <code className="text-zinc-300">import os</code><br/>
+import { MobileMenu } from "@/components/MobileMenu";
 <br/>
 <code className="text-zinc-300">@app.route('/image')</code><br/>
 <code className="text-zinc-300">def get_image():</code><br/>

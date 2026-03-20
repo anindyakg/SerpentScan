@@ -17,6 +17,7 @@ export default function BlogPost() {
             <span className="text-xl font-bold tracking-tight text-white">SerpentScan</span>
         </Link>
         <div className="flex items-center gap-4">
+            <MobileMenu />
             <Link href="/blog" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-semibold">
                 <ArrowLeft className="w-4 h-4" /> Back to Blog
             </Link>
@@ -87,6 +88,7 @@ export default function BlogPost() {
                 <pre className="text-red-400 font-mono text-sm leading-7">
 <code className="text-zinc-500"># ❌ VULNERABLE</code><br/>
 <code>import subprocess</code><br/>
+import { MobileMenu } from "@/components/MobileMenu";
 <code>user_input = request.form['domain']</code><br/>
 <code>subprocess.run(f"ping -c 4 &#123;user_input&#125;", shell=True)</code>
                 </pre>

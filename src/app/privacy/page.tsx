@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Shield } from "lucide-react";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function PrivacyPage() {
   return (

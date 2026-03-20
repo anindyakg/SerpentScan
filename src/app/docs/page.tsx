@@ -3,6 +3,7 @@
 import { Shield, ChevronRight, Terminal as TerminalIcon, ShieldAlert, Cpu, GitMerge, Search, FileText } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { MobileMenu } from "@/components/MobileMenu";
 
 // The searchable index of our documentation
 const SEARCH_INDEX = [
@@ -108,17 +109,19 @@ export default function DocsPage() {
                 </div>
                 <span className="text-lg font-bold tracking-tight text-white">SerpentScan Docs</span>
             </Link>
-            <div className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400">
+            <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
                 <Link href="/" className="hover:text-white transition-colors">Platform</Link>
                 <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
                 <Link href="/docs" className="text-white font-bold">Documentation</Link>
                 <Link href="/enterprise" className="hover:text-white transition-colors">Enterprise</Link>
                 <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+                <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
             </div>
         </div>
         
         <div className="flex items-center gap-4">
-            <div className="hidden md:flex relative">
+            <MobileMenu />
+            <div className="hidden lg:flex relative">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                     <Search className="w-4 h-4 text-zinc-500" />
                 </div>
@@ -259,8 +262,8 @@ export default function DocsPage() {
                       <h3 className="text-xl font-bold text-white mt-6">Install from source</h3>
                       <div className="bg-[#0b0c10] border border-white/5 rounded p-4">
 <pre className="text-sm text-pink-400 font-mono whitespace-pre overflow-x-auto">
-git clone https://github.com/serpentscan/serpentscan
-cd serpentscan
+git clone https://github.com/anindyakg/SerpentScan
+cd SerpentScan
 pip install -e .
 </pre>
                       </div>

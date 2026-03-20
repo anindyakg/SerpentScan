@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function LandingPage() {
   const { data: session, status } = useSession();
@@ -57,14 +58,16 @@ export default function LandingPage() {
             </div>
             <span className="text-xl font-bold tracking-tight text-white">SerpentScan</span>
         </Link>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
             <Link href="/" className="hover:text-white transition-colors">Platform</Link>
             <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
             <Link href="/docs" className="hover:text-white transition-colors">Docs</Link>
             <Link href="/enterprise" className="hover:text-white transition-colors">Enterprise</Link>
             <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
         </div>
         <div className="flex items-center gap-4">
+            <MobileMenu />
             {status === "unauthenticated" ? (
               <>
                 <button onClick={() => signIn("google")} className="text-sm font-medium text-zinc-300 hover:text-white transition-colors px-3 py-2">Sign in</button>
@@ -93,7 +96,7 @@ export default function LandingPage() {
       <main className="relative z-10 w-full flex flex-col items-center">
         
         {/* HERO SECTION */}
-        <section className="w-full max-w-5xl mx-auto px-6 pt-32 pb-32 flex flex-col items-center text-center relative z-20">
+        <section id="scan" className="w-full max-w-5xl mx-auto px-6 pt-32 pb-32 flex flex-col items-center text-center relative z-20">
             {/* Micro Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 mb-8 backdrop-blur-sm">
                 <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
@@ -153,7 +156,7 @@ export default function LandingPage() {
                 <div className="w-full max-w-xl bg-[#0d0d12] border border-purple-500/30 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(147,51,234,0.2)]">
                     <div className="flex items-center gap-2 bg-[#1a1a24] border-b border-white/10 px-4 py-3 text-left">
                         <Terminal className="w-4 h-4 text-purple-400" />
-                        <span className="text-xs font-semibold text-purple-300 tracking-wider">plasma-cli • Running local trace</span>
+                        <span className="text-xs font-semibold text-purple-300 tracking-wider">SerpentScan-cli • Running local trace</span>
                         <div className="ml-auto w-3 h-3 rounded-full border-2 border-purple-500 border-t-transparent animate-spin"></div>
                     </div>
                     <div className="p-6 font-mono text-[13px] leading-7 text-zinc-400 flex flex-col items-start min-h-[200px] text-left">
@@ -168,12 +171,20 @@ export default function LandingPage() {
                             <motion.div animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-2 h-4 bg-white/70 mt-2 inline-block"/>
                         )}
                         {scanState === "completed" && (
-                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-8 flex gap-4 w-full">
-                                <Link href={`/report?repo=${encodeURIComponent(repoUrl)}`} className="flex-1 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-center transition-colors text-sm">
-                                    View Results
-                                </Link>
-                                <button className="flex-1 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg font-bold text-center transition-colors text-sm">
-                                    Download Results
+                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-8 flex flex-col gap-3 w-full">
+                                <div className="flex gap-4 w-full">
+                                    <Link href={`/report?repo=${encodeURIComponent(repoUrl)}`} target="_blank" rel="noopener noreferrer" className="flex-1 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-lg font-bold text-center transition-colors text-sm shadow-[0_0_15px_rgba(147,51,234,0.3)]">
+                                        View Results
+                                    </Link>
+                                    <button onClick={() => window.open(`/report?repo=${encodeURIComponent(repoUrl)}&print=true`, '_blank')} className="flex-1 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg font-bold text-center transition-colors text-sm">
+                                        Download Results
+                                    </button>
+                                </div>
+                                <button 
+                                    onClick={() => { setScanState("idle"); setRepoUrl(""); setLogs([]); }} 
+                                    className="w-full bg-zinc-900 border border-white/5 hover:border-white/10 hover:bg-zinc-800 text-zinc-400 hover:text-white px-4 py-2.5 rounded-lg font-bold text-center transition-all text-sm mt-1"
+                                >
+                                    Scan Another Repository
                                 </button>
                             </motion.div>
                         )}
@@ -482,70 +493,7 @@ export default function LandingPage() {
 
       </main>
 
-      {/* FOOTER */}
-      <footer className="w-full border-t border-white/10 bg-[#0A0A0C] relative overflow-hidden">
-        <div className="bg-plasma-glow-bottom opacity-50"></div>
-        
-        <div className="relative z-10 w-full flex flex-col items-center pt-24 pb-12">
-            
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-8">Trusted by 10k+ Teams & OSS Companies</p>
-            <div className="flex gap-8 opacity-40 grayscale mb-20 text-white">
-                <Shield className="w-6 h-6"/>
-                <Users className="w-6 h-6"/>
-                <Database className="w-6 h-6"/>
-                <Network className="w-6 h-6"/>
-                <Activity className="w-6 h-6"/>
-            </div>
 
-            <div className="mb-12 md:mb-0 flex flex-col items-center text-center">
-                <div className="flex items-center justify-center gap-3 mb-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-pink-600">
-                        <Shield className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="text-2xl font-bold tracking-tight text-white">SerpentScan</span>
-                </div>
-                <div className="text-zinc-400 font-semibold mb-4 text-sm">Open-source security scanning for Python code</div>
-                <p className="text-zinc-500 max-w-[400px] leading-relaxed text-sm">
-                    Detect vulnerabilities in Python code before they reach production.<br/>
-                    Static analysis, dependency scanning, and AI-assisted security insights in one platform.
-                </p>
-            </div>
-
-            <div className="flex gap-4 mb-20">
-                <button className="bg-white hover:bg-zinc-200 text-black px-6 py-3 rounded-xl font-bold transition-all text-sm">
-                    Scan Repository
-                </button>
-                <button className="bg-[#111] border border-white/10 hover:border-purple-500/50 hover:bg-[#1a1a24] text-white px-6 py-3 rounded-xl font-bold transition-all text-sm">
-                    View on GitHub
-                </button>
-            </div>
-            
-            <div className="w-full max-w-7xl mx-auto px-6 border-t border-white/5 py-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 font-semibold tracking-wide">
-                <p>© 2026 SerpentScan Automation Inc • Local First</p>
-                <div className="flex items-center gap-6 mt-4 md:mt-0">
-                    <a href="https://x.com/serpentscan" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="X (Twitter)">
-                        <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/serpentscan" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="GitHub">
-                        <Github className="w-4 h-4" />
-                    </a>
-                    <a href="https://instagram.com/serpentscan" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
-                        <Instagram className="w-4 h-4" />
-                    </a>
-                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors ml-2">Privacy</a>
-                    <a href="/terms" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors">Terms</a>
-                    <a href="/status" className="hover:text-zinc-300 transition-colors">Status</a>
-                    <a href="/enterprise" className="hover:text-zinc-300 transition-colors">Enterprise</a>
-                </div>
-                <div className="flex gap-3 text-zinc-700 mt-4 md:mt-0">
-                    <div>EN</div>
-                    <div>FR</div>
-                </div>
-            </div>
-        </div>
-      </footer>
     </div>
   );
 }

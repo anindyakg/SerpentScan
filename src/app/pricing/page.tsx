@@ -1,5 +1,6 @@
 import { Shield, Check, Zap } from "lucide-react";
 import Link from "next/link";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function PricingPage() {
   return (
@@ -17,14 +18,16 @@ export default function PricingPage() {
             </div>
             <span className="text-xl font-bold tracking-tight text-white">SerpentScan</span>
         </Link>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
             <Link href="/" className="hover:text-white transition-colors">Platform</Link>
             <Link href="/pricing" className="text-white">Pricing</Link>
             <Link href="/docs" className="hover:text-white transition-colors">Docs</Link>
             <Link href="/enterprise" className="hover:text-white transition-colors">Enterprise</Link>
             <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
         </div>
         <div className="flex items-center gap-4">
+            <MobileMenu />
             <Link href="/" className="bg-white text-black px-5 py-2 rounded-lg text-sm font-semibold hover:bg-zinc-200 transition-colors">
                 Back to App
             </Link>
@@ -87,9 +90,9 @@ export default function PricingPage() {
                 <div className="text-sm text-zinc-400 mb-6 h-10">Security scanning with AI-powered vulnerability insights.</div>
                 <div className="text-5xl font-black text-white mb-8">$29<span className="text-lg text-zinc-500 font-normal">/mo per user</span></div>
                 
-                <button className="w-full bg-white text-black hover:bg-zinc-200 py-3 rounded-xl font-bold mb-8 transition-colors">
+                <Link href="/contact" className="block text-center w-full bg-white text-black hover:bg-zinc-200 py-3 rounded-xl font-bold mb-8 transition-colors">
                     Start 14-Day Free Trial
-                </button>
+                </Link>
 
                 <div className="space-y-4 flex-1">
                     <div className="flex items-start gap-3">
@@ -119,9 +122,9 @@ export default function PricingPage() {
                 <div className="text-sm text-zinc-400 mb-6 h-10">Dedicated deployment and compliance for large organizations.</div>
                 <div className="text-5xl font-black text-white mb-8">Custom</div>
                 
-                <button className="w-full bg-blue-600 text-white hover:bg-blue-700 py-3 rounded-xl font-bold mb-8 transition-colors shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+                <Link href="/contact" className="block text-center w-full bg-blue-600 text-white hover:bg-blue-700 py-3 rounded-xl font-bold mb-8 transition-colors shadow-[0_0_20px_rgba(37,99,235,0.3)]">
                     Contact Sales
-                </button>
+                </Link>
 
                 <div className="space-y-4 flex-1">
                     <div className="flex items-start gap-3">
