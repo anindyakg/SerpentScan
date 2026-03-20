@@ -4,7 +4,7 @@ import { MobileMenu } from "@/components/MobileMenu";
 
 export default function BlogPost() {
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-x-hidden selection:bg-purple-500/30">
+    <div className="relative flex-1 flex flex-col w-full bg-black text-white overflow-x-hidden selection:bg-purple-500/30">
       
       {/* PLASMA GLOWS */}
       <div className="bg-plasma-glow-purple top-[-10%] left-[-10%] opacity-20"></div>
@@ -115,7 +115,7 @@ export default function BlogPost() {
             
             <div className="mt-12 p-8 rounded-2xl bg-[#0b0c10] border border-purple-500/20 text-center">
                 <h3 className="text-xl font-bold text-white mb-3">Don't guess if your code is vulnerable.</h3>
-                <p className="text-zinc-400 mb-6">SerpentScan's static analysis engine catches 10 and many more out of the box with zero configuration.</p>
+                <p className="text-zinc-400 mb-6">SerpentScan's static analysis engine catches all of the above and many more... out of the box with zero configuration.</p>
                 <Link href="/" className="inline-block bg-white text-black font-bold px-6 py-3 rounded-lg hover:bg-zinc-200 transition-colors">
                     Scan Your Repository Free
                 </Link>

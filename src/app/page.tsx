@@ -44,7 +44,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-x-hidden selection:bg-purple-500/30">
+    <div className="relative flex-1 flex flex-col w-full bg-black text-white overflow-x-hidden selection:bg-purple-500/30">
       
       {/* PLASMA GLOWS */}
       <div className="bg-plasma-glow-purple"></div>

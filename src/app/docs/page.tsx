@@ -98,7 +98,7 @@ export default function DocsPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0A0A0C] text-white overflow-hidden selection:bg-purple-500/30">
+    <div className="relative flex-1 flex flex-col w-full bg-[#0A0A0C] text-white overflow-hidden selection:bg-purple-500/30">
       
       {/* HEADER */}
       <nav className="relative z-50 w-full px-6 py-4 flex flex-row items-center justify-between border-b border-white/5 bg-[#0d0d12]/80 backdrop-blur-md sticky top-0">
