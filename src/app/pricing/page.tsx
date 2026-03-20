@@ -194,6 +194,12 @@ export default function PricingPage() {
                             <td className="py-4 px-6 text-center text-zinc-500"><Check className="w-5 h-5 mx-auto text-blue-400" /></td>
                         </tr>
                         <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                            <td className="py-4 px-6 text-zinc-300">Scan private GitHub repos</td>
+                            <td className="py-4 px-6 text-center text-zinc-600">—</td>
+                            <td className="py-4 px-6 text-center text-zinc-500"><Check className="w-5 h-5 mx-auto text-purple-400" /></td>
+                            <td className="py-4 px-6 text-center text-zinc-500"><Check className="w-5 h-5 mx-auto text-blue-400" /></td>
+                        </tr>
+                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
                             <td className="py-4 px-6 text-zinc-300">Private deployment</td>
                             <td className="py-4 px-6 text-center text-zinc-600">—</td>
                             <td className="py-4 px-6 text-center text-zinc-600">—</td>
